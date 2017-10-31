@@ -25,26 +25,45 @@ from sklearn.utils import shuffle
 pd.set_option('display.max_columns', 100)
 
 
-# In[89]:
+# In[7]:
 
 #test
 ili_test = pd.read_csv("../data/raw.csv")
-
-x = ili_test['Latitude'].drop_duplicates()
-y = ili_test['Longitude'].drop_duplicates()
-state = ili_test['statename'].drop_duplicates()
-ili_climate = {}
-
-y.head()
+ili_test.head()
 
 
-# In[ ]:
+# In[24]:
 
-for i in range(len(ili_test['Latitude'])):
-    s=state[i]
-    ili_climate[s] = daymet.get_daymet_singlepixel(longitude=y[i], latitude=x[i], 
+coordinate = ili_test[['statename','Latitude','Longitude']]
+coordinate = coordinate.drop_duplicates()
+coordinate = coordinate.reset_index(drop=True)
+coordinate.head()
+#print("the data contains {} rows".format(len(coordinate)))
+
+
+# In[25]:
+
+coordinate.Longitude[10]
+
+
+# In[27]:
+
+climate = []
+for i in range(2,4):
+    df = daymet.get_daymet_singlepixel(longitude=coordinate.Longitude[i], latitude=coordinate.Latitude[i], 
                                    years=[2010,2015])
-print(ili_climate)
+    df['statename'] = coordinate.statename[i]
+    df['Latitude'] = coordinate.Latitude[i]
+    df['Longitude'] = coordinate.Longitude[i]
+    climate.append(df)
+    
+climate = pd.concat(climate)
+climate
+
+
+# In[29]:
+
+climate
 
 
 # In[13]:
@@ -55,21 +74,20 @@ res = Epidata.fluview(['nat'], [201440, Epidata.range(201501, 201510)])
 print(res['result'], res['message'], len(res['epidata']))
 
 
-# In[121]:
+# In[128]:
 
 #test
 ornl_lat, ornl_long = 35.9313167, -84.3104124
 df = daymet.get_daymet_singlepixel(longitude=ornl_long, latitude=ornl_lat, 
                                    years=[2012,2013])
-df.head()
 
 
-# In[122]:
+# In[129]:
 
 df.index.year
 
 
-# In[123]:
+# In[130]:
 
 df['year'] = df.index.year
 df['month'] = df.index.month
@@ -81,24 +99,24 @@ df.head()
 # [Pandas dataframe groupeby datetime month](https://stackoverflow.com/questions/24082784/pandas-dataframe-groupby-datetime-month)
 # 
 
-# In[124]:
+# In[131]:
 
 df.shape
 
 
-# In[127]:
+# In[132]:
 
 # Group the data by month, and take the mean for each group (i.e. each month)
 df[['prcp', 'tmax', 'tmin']].resample('M').mean().add_prefix('mean_')
 
 
-# In[110]:
+# In[133]:
 
-df_month = df[['month','year', 'yday', 'prcp', 'tmax', 'tmin']].groupby(['month', 'year']).mean()
+df_month = df[['month','year', 'yday', 'prcp', 'tmax', 'tmin']].groupby(['year', 'month']).mean()
 df_month.head()
 
 
-# In[105]:
+# In[134]:
 
 df_month.shape
 
@@ -108,7 +126,7 @@ df_month.shape
 # -  other variable : floats or interger
 # -  index : datetime
 
-# In[12]:
+# In[135]:
 
 df.info()
 

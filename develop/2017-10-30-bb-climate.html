@@ -11833,18 +11833,12 @@ You can access Timestamp as pandas.Timestamp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#test</span>
 <span class="n">ili_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/raw.csv&quot;</span><span class="p">)</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">ili_test</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">ili_test</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">ili_test</span><span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-<span class="n">ili_climate</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">ili_test</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11856,17 +11850,97 @@ You can access Timestamp as pandas.Timestamp
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[89]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>0       -86.791130
-313    -152.404419
-626    -111.431221
-939     -92.373123
-1252   -119.681564
-Name: Longitude, dtype: float64</pre>
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>statename</th>
+      <th>activity_level</th>
+      <th>activity_level_label</th>
+      <th>weekend</th>
+      <th>season</th>
+      <th>weeknumber</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>Oct-01-2016</td>
+      <td>2015-16</td>
+      <td>39</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>Sep-24-2016</td>
+      <td>2015-16</td>
+      <td>38</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>Sep-17-2016</td>
+      <td>2015-16</td>
+      <td>37</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>Sep-10-2016</td>
+      <td>2015-16</td>
+      <td>36</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>Sep-03-2016</td>
+      <td>2015-16</td>
+      <td>35</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 </div>
@@ -11877,17 +11951,992 @@ Name: Longitude, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ili_test</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">])):</span>
-    <span class="n">s</span><span class="o">=</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">ili_climate</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
-                                   <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">,</span><span class="mi">2015</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ili_climate</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coordinate</span> <span class="o">=</span> <span class="n">ili_test</span><span class="p">[[</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">coordinate</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1">#print(&quot;the data contains {} rows&quot;.format(len(coordinate)))</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[24]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>statename</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.791130</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alaska</td>
+      <td>61.370716</td>
+      <td>-152.404419</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>California</td>
+      <td>36.116203</td>
+      <td>-119.681564</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[25]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>-83.643073999999999</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                                   <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">,</span><span class="mi">2015</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">statename</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">climate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+<span class="n">climate</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">climate</span><span class="p">)</span>
+<span class="n">climate</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>making request for latitude, longitude: 33.729759, -111.431221
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=33.729759&amp;lon=-111.431221&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=33.729759&amp;lon=-111.431221&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 34.969704, -92.37312299999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.969704&amp;lon=-92.37312299999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=34.969704&amp;lon=-92.373123&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[27]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>yday</th>
+      <th>prcp</th>
+      <th>tmax</th>
+      <th>tmin</th>
+      <th>statename</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2010-01-01</th>
+      <td>2010</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>2.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-02</th>
+      <td>2010</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-03</th>
+      <td>2010</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-04</th>
+      <td>2010</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>16.5</td>
+      <td>3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-05</th>
+      <td>2010</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>3.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[29]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>yday</th>
+      <th>prcp</th>
+      <th>tmax</th>
+      <th>tmin</th>
+      <th>statename</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2010-01-01</th>
+      <td>2010</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>2.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-02</th>
+      <td>2010</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-03</th>
+      <td>2010</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-04</th>
+      <td>2010</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>16.5</td>
+      <td>3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-05</th>
+      <td>2010</td>
+      <td>5</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>3.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-06</th>
+      <td>2010</td>
+      <td>6</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-07</th>
+      <td>2010</td>
+      <td>7</td>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>4.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-08</th>
+      <td>2010</td>
+      <td>8</td>
+      <td>0.0</td>
+      <td>14.5</td>
+      <td>4.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-09</th>
+      <td>2010</td>
+      <td>9</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>1.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-10</th>
+      <td>2010</td>
+      <td>10</td>
+      <td>0.0</td>
+      <td>15.5</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-11</th>
+      <td>2010</td>
+      <td>11</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-12</th>
+      <td>2010</td>
+      <td>12</td>
+      <td>0.0</td>
+      <td>18.0</td>
+      <td>5.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-13</th>
+      <td>2010</td>
+      <td>13</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>6.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-14</th>
+      <td>2010</td>
+      <td>14</td>
+      <td>4.0</td>
+      <td>14.5</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-15</th>
+      <td>2010</td>
+      <td>15</td>
+      <td>0.0</td>
+      <td>17.0</td>
+      <td>4.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-16</th>
+      <td>2010</td>
+      <td>16</td>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>4.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-17</th>
+      <td>2010</td>
+      <td>17</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>3.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-18</th>
+      <td>2010</td>
+      <td>18</td>
+      <td>0.0</td>
+      <td>11.0</td>
+      <td>4.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-19</th>
+      <td>2010</td>
+      <td>19</td>
+      <td>17.0</td>
+      <td>12.5</td>
+      <td>5.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-20</th>
+      <td>2010</td>
+      <td>20</td>
+      <td>41.0</td>
+      <td>10.5</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-21</th>
+      <td>2010</td>
+      <td>21</td>
+      <td>43.0</td>
+      <td>10.5</td>
+      <td>4.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-22</th>
+      <td>2010</td>
+      <td>22</td>
+      <td>82.0</td>
+      <td>8.0</td>
+      <td>2.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-23</th>
+      <td>2010</td>
+      <td>23</td>
+      <td>27.0</td>
+      <td>7.0</td>
+      <td>0.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-24</th>
+      <td>2010</td>
+      <td>24</td>
+      <td>0.0</td>
+      <td>9.5</td>
+      <td>-3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-25</th>
+      <td>2010</td>
+      <td>25</td>
+      <td>0.0</td>
+      <td>13.5</td>
+      <td>-1.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-26</th>
+      <td>2010</td>
+      <td>26</td>
+      <td>0.0</td>
+      <td>14.5</td>
+      <td>1.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-27</th>
+      <td>2010</td>
+      <td>27</td>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>5.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-28</th>
+      <td>2010</td>
+      <td>28</td>
+      <td>4.0</td>
+      <td>10.0</td>
+      <td>5.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-29</th>
+      <td>2010</td>
+      <td>29</td>
+      <td>2.0</td>
+      <td>13.0</td>
+      <td>3.5</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>2010-01-30</th>
+      <td>2010</td>
+      <td>30</td>
+      <td>0.0</td>
+      <td>13.0</td>
+      <td>3.0</td>
+      <td>Arizona</td>
+      <td>33.729759</td>
+      <td>-111.431221</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2015-12-02</th>
+      <td>2015</td>
+      <td>336</td>
+      <td>0.0</td>
+      <td>9.5</td>
+      <td>0.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-03</th>
+      <td>2015</td>
+      <td>337</td>
+      <td>0.0</td>
+      <td>11.0</td>
+      <td>-1.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-04</th>
+      <td>2015</td>
+      <td>338</td>
+      <td>0.0</td>
+      <td>12.5</td>
+      <td>-1.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-05</th>
+      <td>2015</td>
+      <td>339</td>
+      <td>0.0</td>
+      <td>13.0</td>
+      <td>-1.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-06</th>
+      <td>2015</td>
+      <td>340</td>
+      <td>0.0</td>
+      <td>15.5</td>
+      <td>-1.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-07</th>
+      <td>2015</td>
+      <td>341</td>
+      <td>0.0</td>
+      <td>17.5</td>
+      <td>0.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-08</th>
+      <td>2015</td>
+      <td>342</td>
+      <td>0.0</td>
+      <td>17.5</td>
+      <td>1.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-09</th>
+      <td>2015</td>
+      <td>343</td>
+      <td>0.0</td>
+      <td>19.5</td>
+      <td>2.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-10</th>
+      <td>2015</td>
+      <td>344</td>
+      <td>0.0</td>
+      <td>21.0</td>
+      <td>4.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-11</th>
+      <td>2015</td>
+      <td>345</td>
+      <td>0.0</td>
+      <td>22.0</td>
+      <td>6.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-12</th>
+      <td>2015</td>
+      <td>346</td>
+      <td>0.0</td>
+      <td>23.0</td>
+      <td>15.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-13</th>
+      <td>2015</td>
+      <td>347</td>
+      <td>2.0</td>
+      <td>22.5</td>
+      <td>13.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-14</th>
+      <td>2015</td>
+      <td>348</td>
+      <td>44.0</td>
+      <td>20.0</td>
+      <td>9.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-15</th>
+      <td>2015</td>
+      <td>349</td>
+      <td>0.0</td>
+      <td>17.5</td>
+      <td>2.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-16</th>
+      <td>2015</td>
+      <td>350</td>
+      <td>1.0</td>
+      <td>19.5</td>
+      <td>3.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-17</th>
+      <td>2015</td>
+      <td>351</td>
+      <td>0.0</td>
+      <td>15.5</td>
+      <td>-1.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-18</th>
+      <td>2015</td>
+      <td>352</td>
+      <td>0.0</td>
+      <td>11.0</td>
+      <td>0.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-19</th>
+      <td>2015</td>
+      <td>353</td>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>-3.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-20</th>
+      <td>2015</td>
+      <td>354</td>
+      <td>0.0</td>
+      <td>14.5</td>
+      <td>-0.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-21</th>
+      <td>2015</td>
+      <td>355</td>
+      <td>1.0</td>
+      <td>15.5</td>
+      <td>5.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-22</th>
+      <td>2015</td>
+      <td>356</td>
+      <td>1.0</td>
+      <td>19.0</td>
+      <td>2.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-23</th>
+      <td>2015</td>
+      <td>357</td>
+      <td>3.0</td>
+      <td>19.5</td>
+      <td>5.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-24</th>
+      <td>2015</td>
+      <td>358</td>
+      <td>26.0</td>
+      <td>22.5</td>
+      <td>5.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-25</th>
+      <td>2015</td>
+      <td>359</td>
+      <td>0.0</td>
+      <td>20.5</td>
+      <td>8.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-26</th>
+      <td>2015</td>
+      <td>360</td>
+      <td>17.0</td>
+      <td>19.0</td>
+      <td>11.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-27</th>
+      <td>2015</td>
+      <td>361</td>
+      <td>10.0</td>
+      <td>23.5</td>
+      <td>11.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-28</th>
+      <td>2015</td>
+      <td>362</td>
+      <td>109.0</td>
+      <td>15.0</td>
+      <td>5.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-29</th>
+      <td>2015</td>
+      <td>363</td>
+      <td>4.0</td>
+      <td>9.0</td>
+      <td>2.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-30</th>
+      <td>2015</td>
+      <td>364</td>
+      <td>0.0</td>
+      <td>6.5</td>
+      <td>2.0</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+    <tr>
+      <th>2015-12-31</th>
+      <td>2015</td>
+      <td>365</td>
+      <td>0.0</td>
+      <td>8.5</td>
+      <td>-1.5</td>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
+    </tr>
+  </tbody>
+</table>
+<p>1460 rows × 8 columns</p>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -11924,14 +12973,13 @@ Name: Longitude, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="prompt input_prompt">In&nbsp;[128]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#test</span>
 <span class="n">ornl_lat</span><span class="p">,</span> <span class="n">ornl_long</span> <span class="o">=</span> <span class="mf">35.9313167</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.3104124</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">ornl_long</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="n">ornl_lat</span><span class="p">,</span> 
                                    <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2012</span><span class="p">,</span><span class="mi">2013</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11952,91 +13000,13 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 </div>
 
-<div class="output_area">
-<div class="prompt output_prompt">Out[121]:</div>
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>yday</th>
-      <th>prcp</th>
-      <th>tmax</th>
-      <th>tmin</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2012-01-01</th>
-      <td>2012</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>15.5</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2012-01-02</th>
-      <td>2012</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>10.0</td>
-      <td>-3.0</td>
-    </tr>
-    <tr>
-      <th>2012-01-03</th>
-      <td>2012</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>2.0</td>
-      <td>-7.0</td>
-    </tr>
-    <tr>
-      <th>2012-01-04</th>
-      <td>2012</td>
-      <td>4</td>
-      <td>0.0</td>
-      <td>4.5</td>
-      <td>-8.0</td>
-    </tr>
-    <tr>
-      <th>2012-01-05</th>
-      <td>2012</td>
-      <td>5</td>
-      <td>0.0</td>
-      <td>10.0</td>
-      <td>-4.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="prompt input_prompt">In&nbsp;[129]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
@@ -12051,7 +13021,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[122]:</div>
+<div class="prompt output_prompt">Out[129]:</div>
 
 
 
@@ -12070,7 +13040,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="prompt input_prompt">In&nbsp;[130]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
@@ -12089,7 +13059,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[123]:</div>
+<div class="prompt output_prompt">Out[130]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12116,6 +13086,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <th>prcp</th>
       <th>tmax</th>
       <th>tmin</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
       <th>month</th>
       <th>day</th>
     </tr>
@@ -12128,6 +13100,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <td>0.0</td>
       <td>15.5</td>
       <td>1.0</td>
+      <td>35.931317</td>
+      <td>-84.310412</td>
       <td>1</td>
       <td>1</td>
     </tr>
@@ -12138,6 +13112,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <td>3.0</td>
       <td>10.0</td>
       <td>-3.0</td>
+      <td>35.931317</td>
+      <td>-84.310412</td>
       <td>1</td>
       <td>2</td>
     </tr>
@@ -12148,6 +13124,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <td>0.0</td>
       <td>2.0</td>
       <td>-7.0</td>
+      <td>35.931317</td>
+      <td>-84.310412</td>
       <td>1</td>
       <td>3</td>
     </tr>
@@ -12158,6 +13136,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <td>0.0</td>
       <td>4.5</td>
       <td>-8.0</td>
+      <td>35.931317</td>
+      <td>-84.310412</td>
       <td>1</td>
       <td>4</td>
     </tr>
@@ -12168,6 +13148,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <td>0.0</td>
       <td>10.0</td>
       <td>-4.0</td>
+      <td>35.931317</td>
+      <td>-84.310412</td>
       <td>1</td>
       <td>5</td>
     </tr>
@@ -12194,7 +13176,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[124]:</div>
+<div class="prompt input_prompt">In&nbsp;[131]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
@@ -12209,12 +13191,12 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[124]:</div>
+<div class="prompt output_prompt">Out[131]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(730, 7)</pre>
+<pre>(730, 9)</pre>
 </div>
 
 </div>
@@ -12225,7 +13207,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[127]:</div>
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Group the data by month, and take the mean for each group (i.e. each month)</span>
@@ -12241,7 +13223,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[127]:</div>
+<div class="prompt output_prompt">Out[132]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12426,10 +13408,10 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;yday&#39;</span><span class="p">,</span> <span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;tmin&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;yday&#39;</span><span class="p">,</span> <span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;tmin&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 <span class="n">df_month</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -12442,7 +13424,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[110]:</div>
+<div class="prompt output_prompt">Out[133]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12471,8 +13453,8 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <th>tmin</th>
     </tr>
     <tr>
-      <th>month</th>
       <th>year</th>
+      <th>month</th>
       <th></th>
       <th></th>
       <th></th>
@@ -12481,42 +13463,40 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
   </thead>
   <tbody>
     <tr>
-      <th rowspan="2" valign="top">1</th>
-      <th>2012</th>
+      <th rowspan="5" valign="top">2012</th>
+      <th>1</th>
       <td>16.0</td>
       <td>5.548387</td>
       <td>11.193548</td>
       <td>0.000000</td>
     </tr>
     <tr>
-      <th>2013</th>
-      <td>16.0</td>
-      <td>10.709677</td>
-      <td>9.967742</td>
-      <td>0.467742</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">2</th>
-      <th>2012</th>
+      <th>2</th>
       <td>46.0</td>
       <td>3.413793</td>
       <td>13.189655</td>
       <td>1.379310</td>
     </tr>
     <tr>
-      <th>2013</th>
-      <td>45.5</td>
-      <td>2.321429</td>
-      <td>10.714286</td>
-      <td>-0.517857</td>
-    </tr>
-    <tr>
       <th>3</th>
-      <th>2012</th>
       <td>76.0</td>
       <td>4.193548</td>
       <td>22.532258</td>
       <td>8.580645</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>106.5</td>
+      <td>3.866667</td>
+      <td>23.066667</td>
+      <td>9.066667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>137.0</td>
+      <td>3.290323</td>
+      <td>28.000000</td>
+      <td>15.564516</td>
     </tr>
   </tbody>
 </table>
@@ -12531,7 +13511,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span><span class="o">.</span><span class="n">shape</span>
@@ -12546,12 +13526,12 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[105]:</div>
+<div class="prompt output_prompt">Out[134]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(12, 4)</pre>
+<pre>(24, 4)</pre>
 </div>
 
 </div>
@@ -12577,7 +13557,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -12597,14 +13577,18 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 DatetimeIndex: 730 entries, 2012-01-01 to 2013-12-31
-Data columns (total 5 columns):
-year    730 non-null int64
-yday    730 non-null int64
-prcp    730 non-null float64
-tmax    730 non-null float64
-tmin    730 non-null float64
-dtypes: float64(3), int64(2)
-memory usage: 34.2 KB
+Data columns (total 9 columns):
+year         730 non-null int64
+yday         730 non-null int64
+prcp         730 non-null float64
+tmax         730 non-null float64
+tmin         730 non-null float64
+Latitude     730 non-null float64
+Longitude    730 non-null float64
+month        730 non-null int64
+day          730 non-null int64
+dtypes: float64(5), int64(4)
+memory usage: 57.0 KB
 </pre>
 </div>
 </div>
