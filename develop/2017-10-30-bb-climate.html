@@ -11778,7 +11778,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Preparation-&amp;-Exploration-for-Climate-(ulmo)">Data Preparation &amp; Exploration for Climate (ulmo)<a class="anchor-link" href="#Data-Preparation-&amp;-Exploration-for-Climate-(ulmo)">&#182;</a></h2><p>I want to merge the data from GSOD to my ILI data by getting a summary of the data by position</p>
+<h1 id="Data-Preparation-&amp;-Exploration-for-Climate-(ulmo)">Data Preparation &amp; Exploration for Climate (ulmo)<a class="anchor-link" href="#Data-Preparation-&amp;-Exploration-for-Climate-(ulmo)">&#182;</a></h1><p>I want to merge the data from GSOD to my ILI data by getting a summary of the data by position</p>
 <ul>
 <li>exploring daymet : daily temperature, precipitation for any locationsion in the US <a href="https://github.com/ulmo-dev/ulmo/blob/master/examples/Using%20Daymet%20weather%20data%20from%20ORNL%20webservice.ipynb">reference</a></li>
 </ul>
@@ -11951,7 +11951,7 @@ You can access Timestamp as pandas.Timestamp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">coordinate</span> <span class="o">=</span> <span class="n">ili_test</span><span class="p">[[</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span>
@@ -11970,7 +11970,7 @@ You can access Timestamp as pandas.Timestamp
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[39]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12041,10 +12041,10 @@ You can access Timestamp as pandas.Timestamp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili_test</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 </div>
@@ -12056,12 +12056,12 @@ You can access Timestamp as pandas.Timestamp
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[25]:</div>
+<div class="prompt output_prompt">Out[123]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>-83.643073999999999</pre>
+<pre>(15933, 8)</pre>
 </div>
 
 </div>
@@ -12069,23 +12069,31 @@ You can access Timestamp as pandas.Timestamp
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The latitude (WGS84), value between 52.0 and 14.5.</li>
+<li>The longitude (WGS84), value between -131.0 and -53.0.</li>
+</ul>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
-                                   <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">,</span><span class="mi">2015</span><span class="p">])</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">statename</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">climate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-    
-<span class="n">climate</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">climate</span><span class="p">)</span>
-<span class="n">climate</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="p">[</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">131.0</span><span class="p">]</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="p">[</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">53.0</span><span class="p">]</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="p">[</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span> <span class="o">&gt;=</span> <span class="mf">14.5</span><span class="p">]</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="p">[</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span> <span class="o">&lt;=</span> <span class="mf">52.0</span><span class="p">]</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">coordinate</span>
 </pre></div>
 
 </div>
@@ -12097,19 +12105,7 @@ You can access Timestamp as pandas.Timestamp
 
 
 <div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>making request for latitude, longitude: 33.729759, -111.431221
-processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=33.729759&amp;lon=-111.431221&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=33.729759&amp;lon=-111.431221&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
-making request for latitude, longitude: 34.969704, -92.37312299999999
-processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.969704&amp;lon=-92.37312299999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=34.969704&amp;lon=-92.373123&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12131,11 +12127,6 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>year</th>
-      <th>yday</th>
-      <th>prcp</th>
-      <th>tmax</th>
-      <th>tmin</th>
       <th>statename</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -12143,59 +12134,298 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
   </thead>
   <tbody>
     <tr>
-      <th>2010-01-01</th>
-      <td>2010</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>15.0</td>
-      <td>2.0</td>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.791130</td>
+    </tr>
+    <tr>
+      <th>1</th>
       <td>Arizona</td>
       <td>33.729759</td>
       <td>-111.431221</td>
     </tr>
     <tr>
-      <th>2010-01-02</th>
-      <td>2010</td>
-      <td>2</td>
-      <td>0.0</td>
-      <td>17.0</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <th>2</th>
+      <td>Arkansas</td>
+      <td>34.969704</td>
+      <td>-92.373123</td>
     </tr>
     <tr>
-      <th>2010-01-03</th>
-      <td>2010</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>17.0</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <th>3</th>
+      <td>California</td>
+      <td>36.116203</td>
+      <td>-119.681564</td>
     </tr>
     <tr>
-      <th>2010-01-04</th>
-      <td>2010</td>
-      <td>4</td>
-      <td>0.0</td>
-      <td>16.5</td>
-      <td>3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <th>4</th>
+      <td>Colorado</td>
+      <td>39.059811</td>
+      <td>-105.311104</td>
     </tr>
     <tr>
-      <th>2010-01-05</th>
-      <td>2010</td>
-      <td>5</td>
-      <td>0.0</td>
-      <td>17.0</td>
-      <td>3.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <th>5</th>
+      <td>Connecticut</td>
+      <td>41.597782</td>
+      <td>-72.755371</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Delaware</td>
+      <td>39.318523</td>
+      <td>-75.507141</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>District of Columbia</td>
+      <td>38.897438</td>
+      <td>-77.026817</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Florida</td>
+      <td>27.766279</td>
+      <td>-81.686783</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Georgia</td>
+      <td>33.040619</td>
+      <td>-83.643074</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Idaho</td>
+      <td>44.240459</td>
+      <td>-114.478828</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Illinois</td>
+      <td>40.349457</td>
+      <td>-88.986137</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Indiana</td>
+      <td>39.849426</td>
+      <td>-86.258278</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Iowa</td>
+      <td>42.011539</td>
+      <td>-93.210526</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Kansas</td>
+      <td>38.526600</td>
+      <td>-96.726486</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Kentucky</td>
+      <td>37.668140</td>
+      <td>-84.670067</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Louisiana</td>
+      <td>31.169546</td>
+      <td>-91.867805</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Maine</td>
+      <td>44.693947</td>
+      <td>-69.381927</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Maryland</td>
+      <td>39.063946</td>
+      <td>-76.802101</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Massachusetts</td>
+      <td>42.230171</td>
+      <td>-71.530106</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Michigan</td>
+      <td>43.326618</td>
+      <td>-84.536095</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Minnesota</td>
+      <td>45.694454</td>
+      <td>-93.900192</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Mississippi</td>
+      <td>32.741646</td>
+      <td>-89.678696</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Missouri</td>
+      <td>38.456085</td>
+      <td>-92.288368</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Montana</td>
+      <td>46.921925</td>
+      <td>-110.454353</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Nebraska</td>
+      <td>41.125370</td>
+      <td>-98.268082</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Nevada</td>
+      <td>38.313515</td>
+      <td>-117.055374</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>New Hampshire</td>
+      <td>43.452492</td>
+      <td>-71.563896</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>New Jersey</td>
+      <td>40.298904</td>
+      <td>-74.521011</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>New Mexico</td>
+      <td>34.840515</td>
+      <td>-106.248482</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>New York</td>
+      <td>42.165726</td>
+      <td>-74.948051</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>North Carolina</td>
+      <td>35.630066</td>
+      <td>-79.806419</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>North Dakota</td>
+      <td>47.528912</td>
+      <td>-99.784012</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Ohio</td>
+      <td>40.388783</td>
+      <td>-82.764915</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Oklahoma</td>
+      <td>35.565342</td>
+      <td>-96.928917</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Oregon</td>
+      <td>44.572021</td>
+      <td>-122.070938</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Pennsylvania</td>
+      <td>40.590752</td>
+      <td>-77.209755</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Rhode Island</td>
+      <td>41.680893</td>
+      <td>-71.511780</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>South Carolina</td>
+      <td>33.856892</td>
+      <td>-80.945007</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>South Dakota</td>
+      <td>44.299782</td>
+      <td>-99.438828</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Tennessee</td>
+      <td>35.747845</td>
+      <td>-86.692345</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Texas</td>
+      <td>31.054487</td>
+      <td>-97.563461</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Utah</td>
+      <td>40.150032</td>
+      <td>-111.862434</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Vermont</td>
+      <td>44.045876</td>
+      <td>-72.710686</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>Virginia</td>
+      <td>37.769337</td>
+      <td>-78.169968</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Washington</td>
+      <td>47.400902</td>
+      <td>-121.490494</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>West Virginia</td>
+      <td>38.491226</td>
+      <td>-80.954453</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Wisconsin</td>
+      <td>44.268543</td>
+      <td>-89.616508</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.302490</td>
     </tr>
   </tbody>
 </table>
@@ -12210,10 +12440,25 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coordinate</span><span class="o">.</span><span class="n">statename</span><span class="p">)):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                                   <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2010</span><span class="p">,</span><span class="mi">2015</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">statename</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Latitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coordinate</span><span class="o">.</span><span class="n">Longitude</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">climate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+<span class="n">climate</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">climate</span><span class="p">)</span>
+
+<span class="n">climate</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
+<span class="n">climate</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+<span class="n">climate</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span>
+
+<span class="n">climate</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12225,7 +12470,113 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>making request for latitude, longitude: 32.806671, -86.79113000000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=32.806671&amp;lon=-86.79113000000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=32.806671&amp;lon=-86.79113&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 33.729759, -111.431221
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=33.729759&amp;lon=-111.431221&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=33.729759&amp;lon=-111.431221&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 34.969704, -92.37312299999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.969704&amp;lon=-92.37312299999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=34.969704&amp;lon=-92.373123&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 36.116203000000006, -119.681564
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=36.116203000000006&amp;lon=-119.681564&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=36.116203&amp;lon=-119.681564&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 39.059810999999996, -105.311104
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=39.059810999999996&amp;lon=-105.311104&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=39.059811&amp;lon=-105.311104&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 41.597782, -72.755371
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=41.597782&amp;lon=-72.755371&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=41.597782&amp;lon=-72.755371&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 39.318523, -75.507141
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=39.318523&amp;lon=-75.507141&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=39.318523&amp;lon=-75.507141&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 38.897438, -77.02681700000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=38.897438&amp;lon=-77.02681700000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=38.897438&amp;lon=-77.026817&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 27.766278999999997, -81.68678299999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=27.766278999999997&amp;lon=-81.68678299999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=27.766279&amp;lon=-81.686783&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 33.040619, -83.643074
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=33.040619&amp;lon=-83.643074&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=33.040619&amp;lon=-83.643074&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.240459, -114.47882800000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.240459&amp;lon=-114.47882800000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.240459&amp;lon=-114.478828&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 40.349457, -88.986137
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=40.349457&amp;lon=-88.986137&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=40.349457&amp;lon=-88.986137&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 39.849426, -86.258278
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=39.849426&amp;lon=-86.258278&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=39.849426&amp;lon=-86.258278&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 42.011539, -93.210526
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=42.011539&amp;lon=-93.210526&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=42.011539&amp;lon=-93.210526&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 38.5266, -96.726486
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=38.5266&amp;lon=-96.726486&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=38.5266&amp;lon=-96.726486&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 37.66814, -84.670067
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=37.66814&amp;lon=-84.670067&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=37.66814&amp;lon=-84.670067&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 31.169546, -91.867805
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=31.169546&amp;lon=-91.867805&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=31.169546&amp;lon=-91.867805&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.693946999999994, -69.381927
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.693946999999994&amp;lon=-69.381927&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.693947&amp;lon=-69.381927&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 39.063946, -76.80210100000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=39.063946&amp;lon=-76.80210100000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=39.063946&amp;lon=-76.802101&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 42.230171, -71.530106
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=42.230171&amp;lon=-71.530106&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=42.230171&amp;lon=-71.530106&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 43.326617999999996, -84.53609499999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=43.326617999999996&amp;lon=-84.53609499999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=43.326618&amp;lon=-84.536095&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 45.694454, -93.900192
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=45.694454&amp;lon=-93.900192&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=45.694454&amp;lon=-93.900192&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 32.741646, -89.678696
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=32.741646&amp;lon=-89.678696&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=32.741646&amp;lon=-89.678696&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 38.456084999999995, -92.288368
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=38.456084999999995&amp;lon=-92.288368&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=38.456085&amp;lon=-92.288368&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 46.921925, -110.454353
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=46.921925&amp;lon=-110.454353&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=46.921925&amp;lon=-110.454353&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 41.125370000000004, -98.26808199999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=41.125370000000004&amp;lon=-98.26808199999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=41.12537&amp;lon=-98.268082&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 38.313515, -117.055374
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=38.313515&amp;lon=-117.055374&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=38.313515&amp;lon=-117.055374&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 43.452492, -71.563896
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=43.452492&amp;lon=-71.563896&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=43.452492&amp;lon=-71.563896&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 40.298904, -74.521011
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=40.298904&amp;lon=-74.521011&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=40.298904&amp;lon=-74.521011&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 34.840515, -106.24848200000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.840515&amp;lon=-106.24848200000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=34.840515&amp;lon=-106.248482&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 42.165726, -74.948051
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=42.165726&amp;lon=-74.948051&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=42.165726&amp;lon=-74.948051&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 35.630066, -79.80641899999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.630066&amp;lon=-79.80641899999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=35.630066&amp;lon=-79.806419&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 47.528912, -99.784012
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=47.528912&amp;lon=-99.784012&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=47.528912&amp;lon=-99.784012&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 40.388783000000004, -82.764915
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=40.388783000000004&amp;lon=-82.764915&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=40.388783&amp;lon=-82.764915&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 35.565342, -96.928917
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.565342&amp;lon=-96.928917&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=35.565342&amp;lon=-96.928917&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.572021, -122.07093799999998
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.572021&amp;lon=-122.07093799999998&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.572021&amp;lon=-122.070938&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 40.590752, -77.209755
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=40.590752&amp;lon=-77.209755&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=40.590752&amp;lon=-77.209755&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 41.680893, -71.51178
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=41.680893&amp;lon=-71.51178&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=41.680893&amp;lon=-71.51178&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 33.856891999999995, -80.94500699999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=33.856891999999995&amp;lon=-80.94500699999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=33.856892&amp;lon=-80.945007&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.299782, -99.438828
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.299782&amp;lon=-99.438828&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.299782&amp;lon=-99.438828&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 35.747845, -86.69234499999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.747845&amp;lon=-86.69234499999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=35.747845&amp;lon=-86.692345&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 31.054486999999998, -97.563461
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=31.054486999999998&amp;lon=-97.563461&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=31.054487&amp;lon=-97.563461&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 40.150032, -111.86243400000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=40.150032&amp;lon=-111.86243400000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=40.150032&amp;lon=-111.862434&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.045876, -72.710686
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.045876&amp;lon=-72.710686&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.045876&amp;lon=-72.710686&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 37.769337, -78.16996800000001
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=37.769337&amp;lon=-78.16996800000001&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=37.769337&amp;lon=-78.169968&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 47.400902, -121.490494
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=47.400902&amp;lon=-121.490494&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=47.400902&amp;lon=-121.490494&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 38.491226, -80.954453
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=38.491226&amp;lon=-80.954453&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=38.491226&amp;lon=-80.954453&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 44.268543, -89.616508
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=44.268543&amp;lon=-89.616508&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=44.268543&amp;lon=-89.616508&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+making request for latitude, longitude: 42.755966, -107.30248999999999
+processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=42.755966&amp;lon=-107.30248999999999&amp;measuredParams=tmax,tmin,prcp&amp;year=2010,2015&amp;lat=42.755966&amp;lon=-107.30249&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2010%2C2015
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[89]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12262,166 +12613,166 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
       <th>2010-01-01</th>
       <td>2010</td>
       <td>1</td>
-      <td>0.0</td>
-      <td>15.0</td>
-      <td>2.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>1.0</td>
+      <td>10.5</td>
+      <td>1.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-02</th>
       <td>2010</td>
       <td>2</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>7.5</td>
+      <td>-3.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-03</th>
       <td>2010</td>
       <td>3</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>4.5</td>
+      <td>-4.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-04</th>
       <td>2010</td>
       <td>4</td>
       <td>0.0</td>
-      <td>16.5</td>
-      <td>3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>2.5</td>
+      <td>-5.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-05</th>
       <td>2010</td>
       <td>5</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>3.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>1.5</td>
+      <td>-8.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-06</th>
       <td>2010</td>
       <td>6</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>4.0</td>
+      <td>-9.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-07</th>
       <td>2010</td>
       <td>7</td>
       <td>0.0</td>
-      <td>16.0</td>
-      <td>4.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>5.0</td>
+      <td>-7.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-08</th>
       <td>2010</td>
       <td>8</td>
       <td>0.0</td>
-      <td>14.5</td>
-      <td>4.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>1.5</td>
+      <td>-7.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-09</th>
       <td>2010</td>
       <td>9</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>1.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>-9.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-10</th>
       <td>2010</td>
       <td>10</td>
       <td>0.0</td>
-      <td>15.5</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>2.0</td>
+      <td>-9.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-11</th>
       <td>2010</td>
       <td>11</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>5.5</td>
+      <td>-10.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-12</th>
       <td>2010</td>
       <td>12</td>
       <td>0.0</td>
-      <td>18.0</td>
-      <td>5.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>7.0</td>
+      <td>-6.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-13</th>
       <td>2010</td>
       <td>13</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>6.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>8.5</td>
+      <td>-6.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-14</th>
       <td>2010</td>
       <td>14</td>
-      <td>4.0</td>
-      <td>14.5</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>-5.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-15</th>
       <td>2010</td>
       <td>15</td>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>4.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>15.5</td>
+      <td>-4.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-16</th>
@@ -12429,164 +12780,164 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
       <td>16</td>
       <td>0.0</td>
       <td>16.0</td>
-      <td>4.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>2.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-17</th>
       <td>2010</td>
       <td>17</td>
-      <td>0.0</td>
       <td>15.0</td>
-      <td>3.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>15.5</td>
+      <td>8.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-18</th>
       <td>2010</td>
       <td>18</td>
-      <td>0.0</td>
-      <td>11.0</td>
-      <td>4.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>4.0</td>
+      <td>14.5</td>
+      <td>5.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-19</th>
       <td>2010</td>
       <td>19</td>
-      <td>17.0</td>
-      <td>12.5</td>
-      <td>5.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>18.5</td>
+      <td>1.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-20</th>
       <td>2010</td>
       <td>20</td>
-      <td>41.0</td>
-      <td>10.5</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>19.0</td>
+      <td>4.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-21</th>
       <td>2010</td>
       <td>21</td>
-      <td>43.0</td>
-      <td>10.5</td>
-      <td>4.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>46.0</td>
+      <td>19.5</td>
+      <td>8.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-22</th>
       <td>2010</td>
       <td>22</td>
-      <td>82.0</td>
-      <td>8.0</td>
-      <td>2.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>18.0</td>
+      <td>6.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-23</th>
       <td>2010</td>
       <td>23</td>
-      <td>27.0</td>
-      <td>7.0</td>
-      <td>0.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>5.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-24</th>
       <td>2010</td>
       <td>24</td>
-      <td>0.0</td>
-      <td>9.5</td>
-      <td>-3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>33.0</td>
+      <td>18.0</td>
+      <td>8.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-25</th>
       <td>2010</td>
       <td>25</td>
-      <td>0.0</td>
-      <td>13.5</td>
-      <td>-1.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>81.0</td>
+      <td>16.5</td>
+      <td>4.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-26</th>
       <td>2010</td>
       <td>26</td>
       <td>0.0</td>
-      <td>14.5</td>
-      <td>1.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>14.0</td>
+      <td>1.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-27</th>
       <td>2010</td>
       <td>27</td>
       <td>0.0</td>
-      <td>12.0</td>
-      <td>5.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>13.0</td>
+      <td>-1.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-28</th>
       <td>2010</td>
       <td>28</td>
-      <td>4.0</td>
-      <td>10.0</td>
-      <td>5.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>-1.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-29</th>
       <td>2010</td>
       <td>29</td>
-      <td>2.0</td>
-      <td>13.0</td>
-      <td>3.5</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>2.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2010-01-30</th>
       <td>2010</td>
       <td>30</td>
-      <td>0.0</td>
-      <td>13.0</td>
-      <td>3.0</td>
-      <td>Arizona</td>
-      <td>33.729759</td>
-      <td>-111.431221</td>
+      <td>17.0</td>
+      <td>11.0</td>
+      <td>1.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>...</th>
@@ -12604,334 +12955,334 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
       <td>2015</td>
       <td>336</td>
       <td>0.0</td>
-      <td>9.5</td>
-      <td>0.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-1.5</td>
+      <td>-10.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-03</th>
       <td>2015</td>
       <td>337</td>
       <td>0.0</td>
-      <td>11.0</td>
-      <td>-1.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>1.5</td>
+      <td>-9.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-04</th>
       <td>2015</td>
       <td>338</td>
       <td>0.0</td>
-      <td>12.5</td>
-      <td>-1.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>3.5</td>
+      <td>-6.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-05</th>
       <td>2015</td>
       <td>339</td>
       <td>0.0</td>
-      <td>13.0</td>
-      <td>-1.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>1.0</td>
+      <td>-7.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-06</th>
       <td>2015</td>
       <td>340</td>
       <td>0.0</td>
-      <td>15.5</td>
-      <td>-1.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>1.0</td>
+      <td>-8.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-07</th>
       <td>2015</td>
       <td>341</td>
       <td>0.0</td>
-      <td>17.5</td>
-      <td>0.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>3.0</td>
+      <td>-4.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-08</th>
       <td>2015</td>
       <td>342</td>
       <td>0.0</td>
-      <td>17.5</td>
-      <td>1.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>4.5</td>
+      <td>-0.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-09</th>
       <td>2015</td>
       <td>343</td>
       <td>0.0</td>
-      <td>19.5</td>
-      <td>2.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>7.0</td>
+      <td>-1.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-10</th>
       <td>2015</td>
       <td>344</td>
       <td>0.0</td>
-      <td>21.0</td>
-      <td>4.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>4.5</td>
+      <td>-4.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-11</th>
       <td>2015</td>
       <td>345</td>
       <td>0.0</td>
-      <td>22.0</td>
-      <td>6.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-6.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-12</th>
       <td>2015</td>
       <td>346</td>
       <td>0.0</td>
-      <td>23.0</td>
-      <td>15.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-1.5</td>
+      <td>-8.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-13</th>
       <td>2015</td>
       <td>347</td>
-      <td>2.0</td>
-      <td>22.5</td>
-      <td>13.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>2.5</td>
+      <td>-8.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-14</th>
       <td>2015</td>
       <td>348</td>
-      <td>44.0</td>
-      <td>20.0</td>
-      <td>9.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-9.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-15</th>
       <td>2015</td>
       <td>349</td>
-      <td>0.0</td>
-      <td>17.5</td>
-      <td>2.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>12.0</td>
+      <td>-7.5</td>
+      <td>-12.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-16</th>
       <td>2015</td>
       <td>350</td>
-      <td>1.0</td>
-      <td>19.5</td>
-      <td>3.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-7.0</td>
+      <td>-13.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-17</th>
       <td>2015</td>
       <td>351</td>
       <td>0.0</td>
-      <td>15.5</td>
-      <td>-1.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-9.5</td>
+      <td>-17.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-18</th>
       <td>2015</td>
       <td>352</td>
       <td>0.0</td>
-      <td>11.0</td>
-      <td>0.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-1.5</td>
+      <td>-11.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-19</th>
       <td>2015</td>
       <td>353</td>
       <td>0.0</td>
-      <td>10.0</td>
-      <td>-3.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>1.5</td>
+      <td>-4.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-20</th>
       <td>2015</td>
       <td>354</td>
       <td>0.0</td>
-      <td>14.5</td>
       <td>-0.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-6.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-21</th>
       <td>2015</td>
       <td>355</td>
-      <td>1.0</td>
-      <td>15.5</td>
-      <td>5.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-2.0</td>
+      <td>-8.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-22</th>
       <td>2015</td>
       <td>356</td>
-      <td>1.0</td>
-      <td>19.0</td>
-      <td>2.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-3.0</td>
+      <td>-9.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-23</th>
       <td>2015</td>
       <td>357</td>
-      <td>3.0</td>
-      <td>19.5</td>
-      <td>5.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-5.5</td>
+      <td>-13.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-24</th>
       <td>2015</td>
       <td>358</td>
-      <td>26.0</td>
-      <td>22.5</td>
-      <td>5.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>3.0</td>
+      <td>-8.0</td>
+      <td>-14.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-25</th>
       <td>2015</td>
       <td>359</td>
       <td>0.0</td>
-      <td>20.5</td>
-      <td>8.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-5.5</td>
+      <td>-17.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-26</th>
       <td>2015</td>
       <td>360</td>
-      <td>17.0</td>
-      <td>19.0</td>
-      <td>11.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>3.0</td>
+      <td>-9.5</td>
+      <td>-18.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-27</th>
       <td>2015</td>
       <td>361</td>
-      <td>10.0</td>
-      <td>23.5</td>
-      <td>11.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-5.5</td>
+      <td>-20.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-28</th>
       <td>2015</td>
       <td>362</td>
-      <td>109.0</td>
-      <td>15.0</td>
-      <td>5.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-5.5</td>
+      <td>-19.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-29</th>
       <td>2015</td>
       <td>363</td>
-      <td>4.0</td>
-      <td>9.0</td>
-      <td>2.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>0.0</td>
+      <td>-9.0</td>
+      <td>-18.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-30</th>
       <td>2015</td>
       <td>364</td>
       <td>0.0</td>
-      <td>6.5</td>
-      <td>2.0</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-8.5</td>
+      <td>-16.5</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
       <th>2015-12-31</th>
       <td>2015</td>
       <td>365</td>
       <td>0.0</td>
-      <td>8.5</td>
-      <td>-1.5</td>
-      <td>Arkansas</td>
-      <td>34.969704</td>
-      <td>-92.373123</td>
+      <td>-9.5</td>
+      <td>-16.0</td>
+      <td>Wyoming</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
   </tbody>
 </table>
-<p>1460 rows × 8 columns</p>
+<p>35770 rows × 8 columns</p>
 </div>
 </div>
 
@@ -12943,7 +13294,21 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># save the file</span>
+<span class="n">climate</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/climate.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">Epidata</span><span class="o">.</span><span class="n">fluview</span><span class="p">([</span><span class="s1">&#39;nat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">201440</span><span class="p">,</span> <span class="n">Epidata</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">201501</span><span class="p">,</span> <span class="mi">201510</span><span class="p">)])</span>
@@ -12973,81 +13338,43 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=34.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[128]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#test</span>
-<span class="n">ornl_lat</span><span class="p">,</span> <span class="n">ornl_long</span> <span class="o">=</span> <span class="mf">35.9313167</span><span class="p">,</span> <span class="o">-</span><span class="mf">84.3104124</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">daymet</span><span class="o">.</span><span class="n">get_daymet_singlepixel</span><span class="p">(</span><span class="n">longitude</span><span class="o">=</span><span class="n">ornl_long</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="n">ornl_lat</span><span class="p">,</span> 
-                                   <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2012</span><span class="p">,</span><span class="mi">2013</span><span class="p">])</span>
+<span class="c1">#ornl_lat, ornl_long = 35.9313167, -84.3104124</span>
+<span class="c1">#df = daymet.get_daymet_singlepixel(longitude=ornl_long, latitude=ornl_lat, </span>
+<span class="c1">#                                   years=[2012,2013])</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>making request for latitude, longitude: 35.9313167, -84.3104124
-processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.9313167&amp;lon=-84.3104124&amp;measuredParams=tmax,tmin,prcp&amp;year=2012,2013&amp;lat=35.9313167&amp;lon=-84.3104124&amp;vars=tmax%2Ctmin%2Cprcp&amp;years=2012%2C2013
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[129]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#df.index.year</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[129]:</div>
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Int64Index([2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012,
-            ...
-            2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013],
-           dtype=&#39;int64&#39;, length=730)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[130]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span>
+<span class="n">climate</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+<span class="n">climate</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">day</span>
 <span class="c1">#df.drop(&#39;index&#39;, axis=0, inplace=True)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">climate</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -13059,7 +13386,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[130]:</div>
+<div class="prompt output_prompt">Out[90]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13086,6 +13413,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
       <th>prcp</th>
       <th>tmax</th>
       <th>tmin</th>
+      <th>statename</th>
       <th>Latitude</th>
       <th>Longitude</th>
       <th>month</th>
@@ -13094,62 +13422,67 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
   </thead>
   <tbody>
     <tr>
-      <th>2012-01-01</th>
-      <td>2012</td>
+      <th>2010-01-01</th>
+      <td>2010</td>
       <td>1</td>
-      <td>0.0</td>
-      <td>15.5</td>
       <td>1.0</td>
-      <td>35.931317</td>
-      <td>-84.310412</td>
+      <td>10.5</td>
+      <td>1.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
       <td>1</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>2012-01-02</th>
-      <td>2012</td>
+      <th>2010-01-02</th>
+      <td>2010</td>
       <td>2</td>
-      <td>3.0</td>
-      <td>10.0</td>
-      <td>-3.0</td>
-      <td>35.931317</td>
-      <td>-84.310412</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2012-01-03</th>
-      <td>2012</td>
-      <td>3</td>
       <td>0.0</td>
-      <td>2.0</td>
-      <td>-7.0</td>
-      <td>35.931317</td>
-      <td>-84.310412</td>
+      <td>7.5</td>
+      <td>-3.0</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
       <td>1</td>
-      <td>3</td>
+      <td>2</td>
     </tr>
     <tr>
-      <th>2012-01-04</th>
-      <td>2012</td>
-      <td>4</td>
+      <th>2010-01-03</th>
+      <td>2010</td>
+      <td>3</td>
       <td>0.0</td>
       <td>4.5</td>
-      <td>-8.0</td>
-      <td>35.931317</td>
-      <td>-84.310412</td>
+      <td>-4.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2010-01-04</th>
+      <td>2010</td>
+      <td>4</td>
+      <td>0.0</td>
+      <td>2.5</td>
+      <td>-5.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
       <td>1</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>2012-01-05</th>
-      <td>2012</td>
+      <th>2010-01-05</th>
+      <td>2010</td>
       <td>5</td>
       <td>0.0</td>
-      <td>10.0</td>
-      <td>-4.0</td>
-      <td>35.931317</td>
-      <td>-84.310412</td>
+      <td>1.5</td>
+      <td>-8.5</td>
+      <td>Alabama</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
       <td>1</td>
       <td>5</td>
     </tr>
@@ -13176,10 +13509,10 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[131]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">climate</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 </div>
@@ -13191,12 +13524,12 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[131]:</div>
+<div class="prompt output_prompt">Out[91]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(730, 9)</pre>
+<pre>(35770, 10)</pre>
 </div>
 
 </div>
@@ -13207,211 +13540,14 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[132]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Group the data by month, and take the mean for each group (i.e. each month)</span>
-<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;tmin&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s1">&#39;mean_&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt output_prompt">Out[132]:</div>
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean_prcp</th>
-      <th>mean_tmax</th>
-      <th>mean_tmin</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2012-01-31</th>
-      <td>5.548387</td>
-      <td>11.193548</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>2012-02-29</th>
-      <td>3.413793</td>
-      <td>13.189655</td>
-      <td>1.379310</td>
-    </tr>
-    <tr>
-      <th>2012-03-31</th>
-      <td>4.193548</td>
-      <td>22.532258</td>
-      <td>8.580645</td>
-    </tr>
-    <tr>
-      <th>2012-04-30</th>
-      <td>3.866667</td>
-      <td>23.066667</td>
-      <td>9.066667</td>
-    </tr>
-    <tr>
-      <th>2012-05-31</th>
-      <td>3.290323</td>
-      <td>28.000000</td>
-      <td>15.564516</td>
-    </tr>
-    <tr>
-      <th>2012-06-30</th>
-      <td>1.533333</td>
-      <td>30.833333</td>
-      <td>16.883333</td>
-    </tr>
-    <tr>
-      <th>2012-07-31</th>
-      <td>7.193548</td>
-      <td>32.967742</td>
-      <td>21.112903</td>
-    </tr>
-    <tr>
-      <th>2012-08-31</th>
-      <td>3.709677</td>
-      <td>30.338710</td>
-      <td>18.306452</td>
-    </tr>
-    <tr>
-      <th>2012-09-30</th>
-      <td>7.266667</td>
-      <td>27.166667</td>
-      <td>15.033333</td>
-    </tr>
-    <tr>
-      <th>2012-10-31</th>
-      <td>1.741935</td>
-      <td>19.774194</td>
-      <td>8.645161</td>
-    </tr>
-    <tr>
-      <th>2012-11-30</th>
-      <td>1.000000</td>
-      <td>15.500000</td>
-      <td>0.700000</td>
-    </tr>
-    <tr>
-      <th>2012-12-31</th>
-      <td>6.266667</td>
-      <td>12.783333</td>
-      <td>2.950000</td>
-    </tr>
-    <tr>
-      <th>2013-01-31</th>
-      <td>10.709677</td>
-      <td>9.967742</td>
-      <td>0.467742</td>
-    </tr>
-    <tr>
-      <th>2013-02-28</th>
-      <td>2.321429</td>
-      <td>10.714286</td>
-      <td>-0.517857</td>
-    </tr>
-    <tr>
-      <th>2013-03-31</th>
-      <td>4.709677</td>
-      <td>11.677419</td>
-      <td>0.693548</td>
-    </tr>
-    <tr>
-      <th>2013-04-30</th>
-      <td>5.933333</td>
-      <td>21.200000</td>
-      <td>7.333333</td>
-    </tr>
-    <tr>
-      <th>2013-05-31</th>
-      <td>4.709677</td>
-      <td>25.080645</td>
-      <td>12.241935</td>
-    </tr>
-    <tr>
-      <th>2013-06-30</th>
-      <td>6.566667</td>
-      <td>29.433333</td>
-      <td>18.350000</td>
-    </tr>
-    <tr>
-      <th>2013-07-31</th>
-      <td>7.741935</td>
-      <td>29.064516</td>
-      <td>19.387097</td>
-    </tr>
-    <tr>
-      <th>2013-08-31</th>
-      <td>5.322581</td>
-      <td>29.322581</td>
-      <td>19.354839</td>
-    </tr>
-    <tr>
-      <th>2013-09-30</th>
-      <td>4.033333</td>
-      <td>27.733333</td>
-      <td>15.966667</td>
-    </tr>
-    <tr>
-      <th>2013-10-31</th>
-      <td>0.516129</td>
-      <td>21.870968</td>
-      <td>9.806452</td>
-    </tr>
-    <tr>
-      <th>2013-11-30</th>
-      <td>4.400000</td>
-      <td>13.500000</td>
-      <td>1.450000</td>
-    </tr>
-    <tr>
-      <th>2013-12-31</th>
-      <td>7.387097</td>
-      <td>10.241935</td>
-      <td>0.258065</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[133]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;yday&#39;</span><span class="p">,</span> <span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;tmin&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span> <span class="o">=</span> <span class="n">climate</span><span class="p">[[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;yday&#39;</span><span class="p">,</span> <span class="s1">&#39;prcp&#39;</span><span class="p">,</span> <span class="s1">&#39;tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;tmin&#39;</span><span class="p">,</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span><span class="s1">&#39;Longitude&#39;</span><span class="p">,</span><span class="s1">&#39;statename&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_month</span> <span class="o">=</span> <span class="n">df_month</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;yday&#39;</span><span class="p">:</span><span class="s1">&#39;day&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;prcp&#39;</span><span class="p">:</span><span class="s1">&#39;mean_prcp&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;tmax&#39;</span><span class="p">:</span> <span class="s1">&#39;mean_tmax&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;tmin&#39;</span><span class="p">:</span><span class="s1">&#39;mean_tmin&#39;</span><span class="p">})</span>
 <span class="n">df_month</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -13424,7 +13560,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[133]:</div>
+<div class="prompt output_prompt">Out[92]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13446,57 +13582,77 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th></th>
-      <th>yday</th>
-      <th>prcp</th>
-      <th>tmax</th>
-      <th>tmin</th>
-    </tr>
-    <tr>
+      <th>statename</th>
       <th>year</th>
       <th>month</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>day</th>
+      <th>mean_prcp</th>
+      <th>mean_tmax</th>
+      <th>mean_tmin</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="5" valign="top">2012</th>
-      <th>1</th>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>2010</td>
+      <td>1</td>
       <td>16.0</td>
-      <td>5.548387</td>
-      <td>11.193548</td>
-      <td>0.000000</td>
+      <td>6.354839</td>
+      <td>10.758065</td>
+      <td>-1.258065</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alabama</td>
+      <td>2010</td>
+      <td>2</td>
+      <td>45.5</td>
+      <td>4.964286</td>
+      <td>10.892857</td>
+      <td>-1.017857</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>46.0</td>
-      <td>3.413793</td>
-      <td>13.189655</td>
-      <td>1.379310</td>
+      <td>Alabama</td>
+      <td>2010</td>
+      <td>3</td>
+      <td>75.0</td>
+      <td>5.516129</td>
+      <td>17.177419</td>
+      <td>4.419355</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>76.0</td>
-      <td>4.193548</td>
-      <td>22.532258</td>
-      <td>8.580645</td>
+      <td>Alabama</td>
+      <td>2010</td>
+      <td>4</td>
+      <td>105.5</td>
+      <td>3.033333</td>
+      <td>26.033333</td>
+      <td>9.783333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>106.5</td>
-      <td>3.866667</td>
-      <td>23.066667</td>
-      <td>9.066667</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>137.0</td>
-      <td>3.290323</td>
-      <td>28.000000</td>
-      <td>15.564516</td>
+      <td>Alabama</td>
+      <td>2010</td>
+      <td>5</td>
+      <td>136.0</td>
+      <td>4.612903</td>
+      <td>29.322581</td>
+      <td>17.096774</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
   </tbody>
 </table>
@@ -13511,7 +13667,7 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_month</span><span class="o">.</span><span class="n">shape</span>
@@ -13526,12 +13682,12 @@ processing data from request: https://daymet.ornl.gov/data/send/saveData?lat=35.
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[134]:</div>
+<div class="prompt output_prompt">Out[93]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(24, 4)</pre>
+<pre>(1176, 9)</pre>
 </div>
 
 </div>
@@ -13599,7 +13755,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#load ILI data from csv</span>
@@ -13616,7 +13772,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[75]:</div>
+<div class="prompt output_prompt">Out[95]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13717,7 +13873,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Clean the data </span>
@@ -13741,7 +13897,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -13756,7 +13912,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[70]:</div>
+<div class="prompt output_prompt">Out[97]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -13857,7 +14013,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">shape</span>
@@ -13872,7 +14028,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[77]:</div>
+<div class="prompt output_prompt">Out[98]:</div>
 
 
 
@@ -13888,7 +14044,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
@@ -13904,7 +14060,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[78]:</div>
+<div class="prompt output_prompt">Out[99]:</div>
 
 
 
@@ -13918,12 +14074,22 @@ memory usage: 57.0 KB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Merge-data">Merge data<a class="anchor-link" href="#Merge-data">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[126]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ili</span><span class="p">,</span> <span class="n">df_month</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span>  <span class="p">],</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 
 </div>
@@ -13935,24 +14101,995 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[126]:</div>
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 15933 entries, 0 to 15932
-Data columns (total 8 columns):
-statename               15933 non-null object
-activity_level          15933 non-null int64
-activity_level_label    15933 non-null object
-Latitude                15933 non-null float64
-Longitude               15933 non-null float64
-year                    15933 non-null int64
-month                   15933 non-null int64
-day                     15933 non-null int64
-dtypes: float64(2), int64(4), object(2)
-memory usage: 995.9+ KB
-</pre>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>statename</th>
+      <th>activity_level</th>
+      <th>activity_level_label</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day_x</th>
+      <th>day_y</th>
+      <th>mean_prcp</th>
+      <th>mean_tmax</th>
+      <th>mean_tmin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>10</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>9</td>
+      <td>24</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>9</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>9</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>9</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>8</td>
+      <td>27</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>8</td>
+      <td>20</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>8</td>
+      <td>13</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>8</td>
+      <td>6</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>7</td>
+      <td>30</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>7</td>
+      <td>23</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>7</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>7</td>
+      <td>9</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>7</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>6</td>
+      <td>25</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>6</td>
+      <td>18</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>6</td>
+      <td>11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>6</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>5</td>
+      <td>28</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>5</td>
+      <td>21</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>5</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>5</td>
+      <td>7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>2</td>
+      <td>13</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>1</td>
+      <td>30</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>1</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>1</td>
+      <td>9</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2016</td>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Alabama</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
+      <td>2015</td>
+      <td>11</td>
+      <td>21</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>15903</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2011</td>
+      <td>2</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15904</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>23</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15905</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15906</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15907</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>25</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15908</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2016</td>
+      <td>3</td>
+      <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15909</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>12</td>
+      <td>20</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15910</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>18</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15911</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15912</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2012</td>
+      <td>12</td>
+      <td>15</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15913</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2012</td>
+      <td>12</td>
+      <td>8</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15914</th>
+      <td>Wyoming</td>
+      <td>5</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2011</td>
+      <td>2</td>
+      <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15915</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2014</td>
+      <td>12</td>
+      <td>27</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15916</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15917</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>2</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15918</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2016</td>
+      <td>3</td>
+      <td>26</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15919</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>9</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15920</th>
+      <td>Wyoming</td>
+      <td>7</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>17</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15921</th>
+      <td>Wyoming</td>
+      <td>7</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15922</th>
+      <td>Wyoming</td>
+      <td>8</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>31</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15923</th>
+      <td>Wyoming</td>
+      <td>8</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>2</td>
+      <td>7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15924</th>
+      <td>Wyoming</td>
+      <td>8</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2016</td>
+      <td>3</td>
+      <td>19</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15925</th>
+      <td>Wyoming</td>
+      <td>8</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>2</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15926</th>
+      <td>Wyoming</td>
+      <td>9</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>24</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15927</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2012</td>
+      <td>12</td>
+      <td>22</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15928</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2012</td>
+      <td>12</td>
+      <td>29</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15929</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15930</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>12</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15931</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>19</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15932</th>
+      <td>Wyoming</td>
+      <td>10</td>
+      <td>High</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2013</td>
+      <td>1</td>
+      <td>26</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>15933 rows × 12 columns</p>
 </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[125]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1259, 12)</pre>
+</div>
+
 </div>
 
 </div>
@@ -14032,7 +15169,7 @@ memory usage: 995.9+ KB
 <div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">meta</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">meta</span>           
 </pre></div>
 
 </div>

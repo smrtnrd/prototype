@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# ## Data Preparation & Exploration for Climate (ulmo)
+# # Data Preparation & Exploration for Climate (ulmo)
 # 
 # I want to merge the data from GSOD to my ILI data by getting a summary of the data by position
 # -  exploring daymet : daily temperature, precipitation for any locationsion in the US [reference](https://github.com/ulmo-dev/ulmo/blob/master/examples/Using%20Daymet%20weather%20data%20from%20ORNL%20webservice.ipynb)
@@ -32,7 +32,7 @@ ili_test = pd.read_csv("../data/raw.csv")
 ili_test.head()
 
 
-# In[24]:
+# In[39]:
 
 coordinate = ili_test[['statename','Latitude','Longitude']]
 coordinate = coordinate.drop_duplicates()
@@ -41,15 +41,28 @@ coordinate.head()
 #print("the data contains {} rows".format(len(coordinate)))
 
 
-# In[25]:
+# In[123]:
 
-coordinate.Longitude[10]
+ili_test.shape
 
 
-# In[27]:
+# -  The latitude (WGS84), value between 52.0 and 14.5.
+# -  The longitude (WGS84), value between -131.0 and -53.0.
+
+# In[43]:
+
+coordinate = coordinate[coordinate.Longitude >= -131.0]
+coordinate = coordinate[coordinate.Longitude <= -53.0]
+coordinate = coordinate[coordinate.Latitude >= 14.5]
+coordinate = coordinate[coordinate.Latitude <= 52.0]
+coordinate = coordinate.reset_index(drop=True)
+coordinate
+
+
+# In[89]:
 
 climate = []
-for i in range(2,4):
+for i in range(len(coordinate.statename)):
     df = daymet.get_daymet_singlepixel(longitude=coordinate.Longitude[i], latitude=coordinate.Latitude[i], 
                                    years=[2010,2015])
     df['statename'] = coordinate.statename[i]
@@ -58,65 +71,67 @@ for i in range(2,4):
     climate.append(df)
     
 climate = pd.concat(climate)
-climate
+
+climate['year'] = climate.index.year
+climate['month'] = climate.index.month
+climate['day'] = climate.index.day
+
+climate.head()
 
 
-# In[29]:
+# In[46]:
 
-climate
-
-
-# In[13]:
+# save the file
+climate.to_csv("../data/climate.csv", sep='\t', encoding='utf-8')
 
 
+# In[47]:
 
 res = Epidata.fluview(['nat'], [201440, Epidata.range(201501, 201510)])
 print(res['result'], res['message'], len(res['epidata']))
 
 
-# In[128]:
+# In[48]:
 
 #test
-ornl_lat, ornl_long = 35.9313167, -84.3104124
-df = daymet.get_daymet_singlepixel(longitude=ornl_long, latitude=ornl_lat, 
-                                   years=[2012,2013])
+#ornl_lat, ornl_long = 35.9313167, -84.3104124
+#df = daymet.get_daymet_singlepixel(longitude=ornl_long, latitude=ornl_lat, 
+#                                   years=[2012,2013])
 
 
-# In[129]:
+# In[49]:
 
-df.index.year
+#df.index.year
 
 
-# In[130]:
+# In[90]:
 
-df['year'] = df.index.year
-df['month'] = df.index.month
-df['day'] = df.index.day
+climate['year'] = climate.index.year
+climate['month'] = climate.index.month
+climate['day'] = climate.index.day
 #df.drop('index', axis=0, inplace=True)
-df.head()
+climate.head()
 
 
 # [Pandas dataframe groupeby datetime month](https://stackoverflow.com/questions/24082784/pandas-dataframe-groupby-datetime-month)
 # 
 
-# In[131]:
+# In[91]:
 
-df.shape
-
-
-# In[132]:
-
-# Group the data by month, and take the mean for each group (i.e. each month)
-df[['prcp', 'tmax', 'tmin']].resample('M').mean().add_prefix('mean_')
+climate.shape
 
 
-# In[133]:
+# In[92]:
 
-df_month = df[['month','year', 'yday', 'prcp', 'tmax', 'tmin']].groupby(['year', 'month']).mean()
+df_month = climate[['month','year', 'yday', 'prcp', 'tmax', 'tmin','Latitude','Longitude','statename']].groupby(['statename','year', 'month',], as_index = False).mean()
+df_month = df_month.rename(columns={'yday':'day',
+                                    'prcp':'mean_prcp',
+                                   'tmax': 'mean_tmax',
+                                   'tmin':'mean_tmin'})
 df_month.head()
 
 
-# In[134]:
+# In[93]:
 
 df_month.shape
 
@@ -131,14 +146,14 @@ df_month.shape
 df.info()
 
 
-# In[75]:
+# In[95]:
 
 #load ILI data from csv
 ili = pd.read_csv("../data/raw.csv")
 ili.head()
 
 
-# In[76]:
+# In[96]:
 
 # Clean the data 
 # tramsform to datetime
@@ -154,25 +169,33 @@ ili['day'] = ili.weekend.dt.day
 ili.drop(['weekend','season','weeknumber'], axis=1, inplace=True)
 
 
-# In[70]:
+# In[97]:
 
 ili.head()
 
 
-# In[77]:
+# In[98]:
 
 ili.shape
 
 
-# In[78]:
+# In[99]:
 
 ili.drop_duplicates()
 ili.shape
 
 
-# In[79]:
+#  ## Merge data
 
-ili.info()
+# In[126]:
+
+df = pd.merge(ili, df_month, on = ['statename', 'year', 'month', 'Latitude', 'Longitude'  ], how = 'left')
+df
+
+
+# In[125]:
+
+df.shape
 
 
 # ## Metadata
@@ -231,7 +254,7 @@ meta.set_index('varname', inplace=True)
 
 # In[57]:
 
-meta
+meta           
 
 
 # In[58]:
