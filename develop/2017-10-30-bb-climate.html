@@ -14013,7 +14013,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">shape</span>
@@ -14028,7 +14028,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[98]:</div>
+<div class="prompt output_prompt">Out[134]:</div>
 
 
 
@@ -14044,7 +14044,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[138]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ili</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
@@ -14060,7 +14060,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[99]:</div>
+<div class="prompt output_prompt">Out[138]:</div>
 
 
 
@@ -14085,10 +14085,11 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[126]:</div>
+<div class="prompt input_prompt">In&nbsp;[139]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ili</span><span class="p">,</span> <span class="n">df_month</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span>  <span class="p">],</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">ili</span><span class="p">,</span> <span class="n">df_month</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;statename&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span>  <span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/train.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -14101,7 +14102,7 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[126]:</div>
+<div class="prompt output_prompt">Out[139]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -14126,8 +14127,8 @@ memory usage: 57.0 KB
       <th>statename</th>
       <th>activity_level</th>
       <th>activity_level_label</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
+      <th>Latitude_x</th>
+      <th>Longitude_x</th>
       <th>year</th>
       <th>month</th>
       <th>day_x</th>
@@ -14135,6 +14136,8 @@ memory usage: 57.0 KB
       <th>mean_prcp</th>
       <th>mean_tmax</th>
       <th>mean_tmin</th>
+      <th>Latitude_y</th>
+      <th>Longitude_y</th>
     </tr>
   </thead>
   <tbody>
@@ -14145,13 +14148,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>10</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>12</td>
+      <td>350.0</td>
+      <td>8.580645</td>
+      <td>19.467742</td>
+      <td>8.451613</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>1</th>
@@ -14160,43 +14165,49 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>9</td>
-      <td>24</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>5</td>
+      <td>350.0</td>
+      <td>8.580645</td>
+      <td>19.467742</td>
+      <td>8.451613</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Alabama</td>
-      <td>1</td>
+      <td>2</td>
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>9</td>
-      <td>17</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>19</td>
+      <td>350.0</td>
+      <td>8.580645</td>
+      <td>19.467742</td>
+      <td>8.451613</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Alabama</td>
-      <td>1</td>
+      <td>2</td>
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>9</td>
-      <td>10</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>12</td>
+      <td>26</td>
+      <td>350.0</td>
+      <td>8.580645</td>
+      <td>19.467742</td>
+      <td>8.451613</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>4</th>
@@ -14205,13 +14216,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>9</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>11</td>
+      <td>21</td>
+      <td>319.5</td>
+      <td>6.200000</td>
+      <td>21.116667</td>
+      <td>9.900000</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>5</th>
@@ -14220,13 +14233,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>8</td>
-      <td>27</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>11</td>
+      <td>14</td>
+      <td>319.5</td>
+      <td>6.200000</td>
+      <td>21.116667</td>
+      <td>9.900000</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>6</th>
@@ -14235,28 +14250,32 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>8</td>
-      <td>20</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>11</td>
+      <td>7</td>
+      <td>319.5</td>
+      <td>6.200000</td>
+      <td>21.116667</td>
+      <td>9.900000</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Alabama</td>
-      <td>1</td>
+      <td>3</td>
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>8</td>
-      <td>13</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>11</td>
+      <td>28</td>
+      <td>319.5</td>
+      <td>6.200000</td>
+      <td>21.116667</td>
+      <td>9.900000</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>8</th>
@@ -14265,13 +14284,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>8</td>
-      <td>6</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>10</td>
+      <td>31</td>
+      <td>289.0</td>
+      <td>1.709677</td>
+      <td>25.258065</td>
+      <td>12.193548</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>9</th>
@@ -14280,13 +14301,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>7</td>
-      <td>30</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>10</td>
+      <td>24</td>
+      <td>289.0</td>
+      <td>1.709677</td>
+      <td>25.258065</td>
+      <td>12.193548</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>10</th>
@@ -14295,13 +14318,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>7</td>
-      <td>23</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>10</td>
+      <td>17</td>
+      <td>289.0</td>
+      <td>1.709677</td>
+      <td>25.258065</td>
+      <td>12.193548</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>11</th>
@@ -14310,13 +14335,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>7</td>
-      <td>16</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>10</td>
+      <td>10</td>
+      <td>289.0</td>
+      <td>1.709677</td>
+      <td>25.258065</td>
+      <td>12.193548</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>12</th>
@@ -14325,13 +14352,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>7</td>
-      <td>9</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>10</td>
+      <td>3</td>
+      <td>289.0</td>
+      <td>1.709677</td>
+      <td>25.258065</td>
+      <td>12.193548</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>13</th>
@@ -14340,13 +14369,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>7</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>9</td>
+      <td>26</td>
+      <td>258.5</td>
+      <td>1.633333</td>
+      <td>29.900000</td>
+      <td>18.333333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>14</th>
@@ -14355,13 +14386,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>6</td>
-      <td>25</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>9</td>
+      <td>19</td>
+      <td>258.5</td>
+      <td>1.633333</td>
+      <td>29.900000</td>
+      <td>18.333333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>15</th>
@@ -14370,13 +14403,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>6</td>
-      <td>18</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>9</td>
+      <td>12</td>
+      <td>258.5</td>
+      <td>1.633333</td>
+      <td>29.900000</td>
+      <td>18.333333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>16</th>
@@ -14385,13 +14420,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>6</td>
-      <td>11</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>9</td>
+      <td>5</td>
+      <td>258.5</td>
+      <td>1.633333</td>
+      <td>29.900000</td>
+      <td>18.333333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>17</th>
@@ -14400,13 +14437,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>6</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>8</td>
+      <td>29</td>
+      <td>228.0</td>
+      <td>4.129032</td>
+      <td>32.709677</td>
+      <td>20.645161</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>18</th>
@@ -14415,13 +14454,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>5</td>
-      <td>28</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>8</td>
+      <td>22</td>
+      <td>228.0</td>
+      <td>4.129032</td>
+      <td>32.709677</td>
+      <td>20.645161</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>19</th>
@@ -14430,13 +14471,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>5</td>
-      <td>21</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>8</td>
+      <td>15</td>
+      <td>228.0</td>
+      <td>4.129032</td>
+      <td>32.709677</td>
+      <td>20.645161</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>20</th>
@@ -14445,13 +14488,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>5</td>
-      <td>14</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>8</td>
+      <td>8</td>
+      <td>228.0</td>
+      <td>4.129032</td>
+      <td>32.709677</td>
+      <td>20.645161</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>21</th>
@@ -14460,13 +14505,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>5</td>
-      <td>7</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>8</td>
+      <td>1</td>
+      <td>228.0</td>
+      <td>4.129032</td>
+      <td>32.709677</td>
+      <td>20.645161</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>22</th>
@@ -14475,13 +14522,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>2</td>
-      <td>13</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>7</td>
+      <td>25</td>
+      <td>197.0</td>
+      <td>3.000000</td>
+      <td>33.596774</td>
+      <td>22.112903</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>23</th>
@@ -14490,13 +14539,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>1</td>
-      <td>30</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>7</td>
+      <td>18</td>
+      <td>197.0</td>
+      <td>3.000000</td>
+      <td>33.596774</td>
+      <td>22.112903</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>24</th>
@@ -14505,13 +14556,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>1</td>
-      <td>16</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>7</td>
+      <td>11</td>
+      <td>197.0</td>
+      <td>3.000000</td>
+      <td>33.596774</td>
+      <td>22.112903</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>25</th>
@@ -14520,13 +14573,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>1</td>
-      <td>9</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>7</td>
+      <td>4</td>
+      <td>197.0</td>
+      <td>3.000000</td>
+      <td>33.596774</td>
+      <td>22.112903</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>26</th>
@@ -14535,13 +14590,15 @@ memory usage: 57.0 KB
       <td>Minimal</td>
       <td>32.806671</td>
       <td>-86.79113</td>
-      <td>2016</td>
-      <td>1</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>2015</td>
+      <td>6</td>
+      <td>27</td>
+      <td>166.5</td>
+      <td>2.933333</td>
+      <td>32.066667</td>
+      <td>20.533333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>27</th>
@@ -14551,12 +14608,14 @@ memory usage: 57.0 KB
       <td>32.806671</td>
       <td>-86.79113</td>
       <td>2015</td>
-      <td>12</td>
-      <td>12</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>6</td>
+      <td>20</td>
+      <td>166.5</td>
+      <td>2.933333</td>
+      <td>32.066667</td>
+      <td>20.533333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>28</th>
@@ -14566,12 +14625,14 @@ memory usage: 57.0 KB
       <td>32.806671</td>
       <td>-86.79113</td>
       <td>2015</td>
-      <td>12</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>6</td>
+      <td>13</td>
+      <td>166.5</td>
+      <td>2.933333</td>
+      <td>32.066667</td>
+      <td>20.533333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>29</th>
@@ -14581,12 +14642,14 @@ memory usage: 57.0 KB
       <td>32.806671</td>
       <td>-86.79113</td>
       <td>2015</td>
-      <td>11</td>
-      <td>21</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>6</td>
+      <td>6</td>
+      <td>166.5</td>
+      <td>2.933333</td>
+      <td>32.066667</td>
+      <td>20.533333</td>
+      <td>32.806671</td>
+      <td>-86.79113</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14602,219 +14665,402 @@ memory usage: 57.0 KB
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>15903</th>
+      <th>3096</th>
       <td>Wyoming</td>
-      <td>4</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2011</td>
-      <td>2</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15904</th>
-      <td>Wyoming</td>
-      <td>4</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>2</td>
-      <td>23</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15905</th>
-      <td>Wyoming</td>
-      <td>4</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
       <td>1</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15906</th>
-      <td>Wyoming</td>
-      <td>4</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>11</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15907</th>
-      <td>Wyoming</td>
-      <td>4</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>25</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15908</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2016</td>
-      <td>3</td>
-      <td>12</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15909</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
-      <td>12</td>
-      <td>20</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15910</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>18</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15911</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>2</td>
-      <td>16</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15912</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2012</td>
-      <td>12</td>
-      <td>15</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15913</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2012</td>
-      <td>12</td>
-      <td>8</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15914</th>
-      <td>Wyoming</td>
-      <td>5</td>
-      <td>Low</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2011</td>
-      <td>2</td>
-      <td>12</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15915</th>
-      <td>Wyoming</td>
-      <td>6</td>
-      <td>Moderate</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2014</td>
-      <td>12</td>
-      <td>27</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15916</th>
-      <td>Wyoming</td>
-      <td>6</td>
-      <td>Moderate</td>
+      <td>Minimal</td>
       <td>42.755966</td>
       <td>-107.30249</td>
       <td>2015</td>
-      <td>1</td>
-      <td>10</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>5</td>
+      <td>2</td>
+      <td>136.0</td>
+      <td>5.419355</td>
+      <td>11.145161</td>
+      <td>1.016129</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
-      <th>15917</th>
+      <th>3097</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>4</td>
+      <td>25</td>
+      <td>105.5</td>
+      <td>1.666667</td>
+      <td>9.450000</td>
+      <td>-2.716667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3098</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>4</td>
+      <td>18</td>
+      <td>105.5</td>
+      <td>1.666667</td>
+      <td>9.450000</td>
+      <td>-2.716667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3099</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>4</td>
+      <td>11</td>
+      <td>105.5</td>
+      <td>1.666667</td>
+      <td>9.450000</td>
+      <td>-2.716667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3100</th>
+      <td>Wyoming</td>
+      <td>2</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>4</td>
+      <td>4</td>
+      <td>105.5</td>
+      <td>1.666667</td>
+      <td>9.450000</td>
+      <td>-2.716667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3101</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>12</td>
+      <td>25</td>
+      <td>350.0</td>
+      <td>1.580645</td>
+      <td>-0.806452</td>
+      <td>-9.145161</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3102</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>12</td>
+      <td>18</td>
+      <td>350.0</td>
+      <td>1.580645</td>
+      <td>-0.806452</td>
+      <td>-9.145161</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3103</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>12</td>
+      <td>11</td>
+      <td>350.0</td>
+      <td>1.580645</td>
+      <td>-0.806452</td>
+      <td>-9.145161</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3104</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>12</td>
+      <td>4</td>
+      <td>350.0</td>
+      <td>1.580645</td>
+      <td>-0.806452</td>
+      <td>-9.145161</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3105</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>11</td>
+      <td>27</td>
+      <td>319.5</td>
+      <td>0.466667</td>
+      <td>1.750000</td>
+      <td>-7.266667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3106</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>11</td>
+      <td>13</td>
+      <td>319.5</td>
+      <td>0.466667</td>
+      <td>1.750000</td>
+      <td>-7.266667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3107</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>11</td>
+      <td>20</td>
+      <td>319.5</td>
+      <td>0.466667</td>
+      <td>1.750000</td>
+      <td>-7.266667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3108</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>11</td>
+      <td>6</td>
+      <td>319.5</td>
+      <td>0.466667</td>
+      <td>1.750000</td>
+      <td>-7.266667</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3109</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>10</td>
+      <td>23</td>
+      <td>289.0</td>
+      <td>0.677419</td>
+      <td>13.096774</td>
+      <td>1.741935</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3110</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>10</td>
+      <td>30</td>
+      <td>289.0</td>
+      <td>0.677419</td>
+      <td>13.096774</td>
+      <td>1.741935</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3111</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>10</td>
+      <td>16</td>
+      <td>289.0</td>
+      <td>0.677419</td>
+      <td>13.096774</td>
+      <td>1.741935</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3112</th>
+      <td>Wyoming</td>
+      <td>1</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2010</td>
+      <td>10</td>
+      <td>9</td>
+      <td>289.0</td>
+      <td>0.677419</td>
+      <td>13.096774</td>
+      <td>1.741935</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3113</th>
+      <td>Wyoming</td>
+      <td>2</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>3</td>
+      <td>28</td>
+      <td>75.0</td>
+      <td>0.548387</td>
+      <td>7.580645</td>
+      <td>-4.419355</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3114</th>
+      <td>Wyoming</td>
+      <td>3</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>3</td>
+      <td>21</td>
+      <td>75.0</td>
+      <td>0.548387</td>
+      <td>7.580645</td>
+      <td>-4.419355</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3115</th>
+      <td>Wyoming</td>
+      <td>3</td>
+      <td>Minimal</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>3</td>
+      <td>14</td>
+      <td>75.0</td>
+      <td>0.548387</td>
+      <td>7.580645</td>
+      <td>-4.419355</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3116</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>3</td>
+      <td>7</td>
+      <td>75.0</td>
+      <td>0.548387</td>
+      <td>7.580645</td>
+      <td>-4.419355</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3117</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>2</td>
+      <td>28</td>
+      <td>45.5</td>
+      <td>0.464286</td>
+      <td>1.446429</td>
+      <td>-8.839286</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3118</th>
+      <td>Wyoming</td>
+      <td>4</td>
+      <td>Low</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>2</td>
+      <td>21</td>
+      <td>45.5</td>
+      <td>0.464286</td>
+      <td>1.446429</td>
+      <td>-8.839286</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3119</th>
       <td>Wyoming</td>
       <td>6</td>
       <td>Moderate</td>
@@ -14823,43 +15069,49 @@ memory usage: 57.0 KB
       <td>2015</td>
       <td>2</td>
       <td>14</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15918</th>
-      <td>Wyoming</td>
-      <td>6</td>
-      <td>Moderate</td>
+      <td>45.5</td>
+      <td>0.464286</td>
+      <td>1.446429</td>
+      <td>-8.839286</td>
       <td>42.755966</td>
       <td>-107.30249</td>
-      <td>2016</td>
-      <td>3</td>
-      <td>26</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
     </tr>
     <tr>
-      <th>15919</th>
+      <th>3120</th>
       <td>Wyoming</td>
-      <td>6</td>
-      <td>Moderate</td>
+      <td>8</td>
+      <td>High</td>
       <td>42.755966</td>
       <td>-107.30249</td>
-      <td>2013</td>
+      <td>2015</td>
       <td>2</td>
-      <td>9</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>7</td>
+      <td>45.5</td>
+      <td>0.464286</td>
+      <td>1.446429</td>
+      <td>-8.839286</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
-      <th>15920</th>
+      <th>3121</th>
+      <td>Wyoming</td>
+      <td>6</td>
+      <td>Moderate</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+      <td>2015</td>
+      <td>1</td>
+      <td>10</td>
+      <td>16.0</td>
+      <td>0.225806</td>
+      <td>0.661290</td>
+      <td>-9.306452</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
+    </tr>
+    <tr>
+      <th>3122</th>
       <td>Wyoming</td>
       <td>7</td>
       <td>Moderate</td>
@@ -14868,13 +15120,15 @@ memory usage: 57.0 KB
       <td>2015</td>
       <td>1</td>
       <td>17</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>16.0</td>
+      <td>0.225806</td>
+      <td>0.661290</td>
+      <td>-9.306452</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
-      <th>15921</th>
+      <th>3123</th>
       <td>Wyoming</td>
       <td>7</td>
       <td>Moderate</td>
@@ -14883,13 +15137,15 @@ memory usage: 57.0 KB
       <td>2015</td>
       <td>1</td>
       <td>3</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>16.0</td>
+      <td>0.225806</td>
+      <td>0.661290</td>
+      <td>-9.306452</td>
+      <td>42.755966</td>
+      <td>-107.30249</td>
     </tr>
     <tr>
-      <th>15922</th>
+      <th>3124</th>
       <td>Wyoming</td>
       <td>8</td>
       <td>High</td>
@@ -14898,58 +15154,15 @@ memory usage: 57.0 KB
       <td>2015</td>
       <td>1</td>
       <td>31</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15923</th>
-      <td>Wyoming</td>
-      <td>8</td>
-      <td>High</td>
+      <td>16.0</td>
+      <td>0.225806</td>
+      <td>0.661290</td>
+      <td>-9.306452</td>
       <td>42.755966</td>
       <td>-107.30249</td>
-      <td>2015</td>
-      <td>2</td>
-      <td>7</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
     </tr>
     <tr>
-      <th>15924</th>
-      <td>Wyoming</td>
-      <td>8</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2016</td>
-      <td>3</td>
-      <td>19</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15925</th>
-      <td>Wyoming</td>
-      <td>8</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>2</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15926</th>
+      <th>3125</th>
       <td>Wyoming</td>
       <td>9</td>
       <td>High</td>
@@ -14958,104 +15171,16 @@ memory usage: 57.0 KB
       <td>2015</td>
       <td>1</td>
       <td>24</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15927</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
+      <td>16.0</td>
+      <td>0.225806</td>
+      <td>0.661290</td>
+      <td>-9.306452</td>
       <td>42.755966</td>
       <td>-107.30249</td>
-      <td>2012</td>
-      <td>12</td>
-      <td>22</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15928</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2012</td>
-      <td>12</td>
-      <td>29</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15929</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>5</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15930</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>12</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15931</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>19</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15932</th>
-      <td>Wyoming</td>
-      <td>10</td>
-      <td>High</td>
-      <td>42.755966</td>
-      <td>-107.30249</td>
-      <td>2013</td>
-      <td>1</td>
-      <td>26</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>15933 rows × 12 columns</p>
+<p>3126 rows × 14 columns</p>
 </div>
 </div>
 
@@ -15067,7 +15192,7 @@ memory usage: 57.0 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="prompt input_prompt">In&nbsp;[137]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
@@ -15082,12 +15207,12 @@ memory usage: 57.0 KB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[125]:</div>
+<div class="prompt output_prompt">Out[137]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(1259, 12)</pre>
+<pre>(3126, 14)</pre>
 </div>
 
 </div>

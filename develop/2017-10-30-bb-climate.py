@@ -174,12 +174,12 @@ ili.drop(['weekend','season','weeknumber'], axis=1, inplace=True)
 ili.head()
 
 
-# In[98]:
+# In[134]:
 
 ili.shape
 
 
-# In[99]:
+# In[138]:
 
 ili.drop_duplicates()
 ili.shape
@@ -187,13 +187,14 @@ ili.shape
 
 #  ## Merge data
 
-# In[126]:
+# In[139]:
 
-df = pd.merge(ili, df_month, on = ['statename', 'year', 'month', 'Latitude', 'Longitude'  ], how = 'left')
+df = pd.merge(ili, df_month, on = ['statename', 'year', 'month'  ])
+df.to_csv("../data/train.csv", sep='\t', encoding='utf-8')
 df
 
 
-# In[125]:
+# In[137]:
 
 df.shape
 
