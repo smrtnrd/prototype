@@ -64,6 +64,7 @@ def prepare_data(data, normalize=True):
     activity_level = dataset['activity_level']
     dataset.drop(labels=['activity_level'], axis=1, inplace=True)
     dataset = pd.concat([dataset, activity_level], axis=1)
+    dataset.to_csv("../data/ili.csv", sep='\t', encoding='utf-8')
     return dataset
 
 
