@@ -121,9 +121,9 @@ climate.head()
 climate.shape
 
 
-# In[92]:
+# In[143]:
 
-df_month = climate[['month','year', 'yday', 'prcp', 'tmax', 'tmin','Latitude','Longitude','statename']].groupby(['statename','year', 'month',], as_index = False).mean()
+df_month = climate[['month','year', 'prcp', 'tmax', 'tmin','statename']].groupby(['statename','year', 'month',], as_index = False).mean()
 df_month = df_month.rename(columns={'yday':'day',
                                     'prcp':'mean_prcp',
                                    'tmax': 'mean_tmax',
@@ -187,11 +187,13 @@ ili.shape
 
 #  ## Merge data
 
-# In[139]:
+# In[154]:
 
-df = pd.merge(ili, df_month, on = ['statename', 'year', 'month'  ])
+df = pd.merge(ili, df_month, on = ['statename', 'year', 'month' ])
+df = df.sort_values(['statename','year','month'], ascending=True)
+df = df.reset_index(drop=True)
 df.to_csv("../data/train.csv", sep='\t', encoding='utf-8')
-df
+df.head()
 
 
 # In[137]:

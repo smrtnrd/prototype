@@ -1,28 +1,17 @@
-import math
-import time
+
 from math import sqrt
+from matplotlib import pyplot
 
-import numpy as np
-from numpy import array
-
-import itertools
-
-import sklearn
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import MinMaxScaler
 
-import keras
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.recurrent import LSTM
-from keras.models import load_model
 
 from pandas import DataFrame
-from pandas import Series
 from pandas import concat
-from pandas import datetime
-
-import h5py
+from pandas import read_csv
 
 from model import helpers
 
@@ -72,50 +61,65 @@ class Model(object):
             agg.dropna(inplace=True)
         return agg
     
-    @staticmethod
-    # create a differenced series
-    def difference(dataset, interval=1):
-        """
-        This will transform the series of values into a series of differences,
-        a simpler representation to work with
-        """
-        diff = list()
-        for i in range(interval, len(dataset)):
-            value = dataset[i] - dataset[i - interval]
-            diff.append(value)
-        return Series(diff)
     
     @staticmethod
     # transform series into train and test sets for supervised learning
-    def prepare_data(series, n_test, n_lag, n_seq):
+    def prepare_data(data):
         """
-        This will transform the series of values into a series of differences,
-        a simpler representation to work with
+        Return a dataframe of that stock and normalize all the values. 
+        (Optional: create moving average)
         """
-        amount_of_features = len(series.columns)
-        print("Amount of features = {}".format(amount_of_features))
+        scaled = data
 
-        # extract raw values
-        raw_values = series.values
-        # transform data to be stationary
-        diff_series = Model.difference(raw_values, 1)
-        diff_values = diff_series.values
-        diff_values = diff_values.reshape(len(diff_values), 1)
-        # rescale values to -1, 1
-        scaler = MinMaxScaler(feature_range=(-1, 1))
-        print('scaler :')
-        scaled_values = scaler.fit_transform(diff_values)
-        print(scaled_values)
-        scaled_values = scaled_values.reshape(len(scaled_values), 1)
-        # transform into supervised learning problem X, y
-        supervised = Model.series_to_supervised(scaled_values, n_lag, n_seq)
-        supervised_values = supervised.values
+        # frame as supervised learning
+        reframed = Model.series_to_supervised(scaled, 8, 4)
+        # drop columns we don't want to predict
+        # reframed.drop(reframed.columns[[9,10,11,12,13,14,15]], axis=1, inplace=True)
+ 
         # split into train and test sets
-        train, test = supervised_values[0:-n_test], supervised_values[-n_test:]
-        print("\nAmount of training data = {}".format(train.shape[0]))
-        print("Amount of testing data = {}".format(test.shape[0]))
+        values = reframed.values
+        n_train_weeks = round(0.8*len(values))
+        train = values[:n_train_weeks, :]
+        test = values[n_train_weeks:, :]
+
+        # split into train and test sets
+        values = reframed.values
+        n_train_weeks = round(0.8*len(values))
+        train = values[:n_train_weeks, :]
+        test = values[n_train_weeks:, :]
+        # split into input and outputs
+        train_X, train_y = train[:, :-1], train[:, -1]
+        test_X, test_y = test[:, :-1], test[:, -1]
+        # reshape input to be 3D [samples, timesteps, features]
+        train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[1]))
+        test_X = test_X.reshape((test_X.shape[0], 1, test_X.shape[1]))
         
-        return scaler, train, test
+
+        return train_X, train_y, test_X, test_y
+
+
+    def denormalize(data, normalized_value):
+        dataset = read_csv(data, index_col=3, header=0)
+        # manually specify column names
+        dataset.columns = ['statename','activity_level','activity_level_label','season','weeknumber','Latitude','Longitude']
+        dataset.index.name = 'date'
+            
+        # convert index to datetime
+        dataset.index = pd.to_datetime(dataset.index, format='%b-%d-%Y')
+            
+        # manually remove the feature we don;t want to evaluate 
+        dataset.drop(['statename', 'season', 'weeknumber','activity_level_label'], axis=1, inplace=True)
+
+        dataset = dataset['activity_level'].values.reshape(-1,1)
+        normalized_value = normalized_value.reshape(-1,1)
+
+        #return df.shape, p.shape
+        min_max_scaler = MinMaxScaler()
+        a = min_max_scaler.fit_transform(dataset)
+        new = min_max_scaler.inverse_transform(normalized_value)
+        
+        return new
+
 
     # def build_model(self):
     #     model = Sequential()
@@ -133,30 +137,34 @@ class Model(object):
     #     return model
 
     # fit an LSTM network to training data
-    def fit_lstm(train, n_lag, n_seq, n_batch, n_epochs, n_neurons):
-        # reshape training into [samples, timesteps, features]
-        X, y = train[:, 0:n_lag], train[:, n_lag:]
-        X = X.reshape(X.shape[0], 1, X.shape[1])
-
+    @staticmethod
+    def fit_lstm(train_X, train_y,test_X, test_y, nb_epoch = 5, n_batch=8 ):
+        
+        #train, n_lag, n_seq, n_batch, n_epochs, n_neurons
+        # prepare data
+       
         # design network
         model = Sequential()
-
-        model.add(LSTM(n_neurons, batch_input_shape=(
-            n_batch, X.shape[1], X.shape[2]), stateful=True))
-        model.add(Dropout(n_dropout))
-
-        model.add(Dense(y.shape[1]))
-        model.compile(loss='mean_squared_error', optimizer='adam')
-        adam = keras.optimizers.Adam(decay=n_decay)
-
-        model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+        model.add(LSTM(50, input_shape=(train_X.shape[1], train_X.shape[2])))
+        model.add(Dense(1))
+        model.compile(loss='mae', optimizer='adam')
         model.summary()
         model.save('LSTM-test-201710.h5')
         # fit network
-        for i in range(nb_epoch):
-            model.fit(X, y, epochs=1, batch_size=n_batch,
-                      verbose=0, shuffle=False)
-            model.reset_states()
+        
+                model.fit(train_X, train_y, 
+                    epochs=1, 
+                    batch_size=n_batch,
+                    validation_data=(test_X, test_y), 
+                    verbose=2, 
+                    shuffle=False)
+                model.reset_states()
+        # plot history
+        pyplot.plot(history.history['loss'], label='train')
+        pyplot.plot(history.history['val_loss'], label='test')
+        pyplot.legend()
+        pyplot.show()
+        
         return model
 
     # make one forecast with an LSTM,
@@ -168,73 +176,6 @@ class Model(object):
         # convert to array
         return [x for x in forecast[0, :]]
 
-    # evaluate the persistence model
-    def make_forecasts(model, n_batch, train, test, n_lag, n_seq):
-        forecasts = list()
-        for i in range(len(test)):
-            X, y = test[i, 0:n_lag], test[i, n_lag:]
-            # make forecast
-            forecast = forecast_lstm(model, X, n_batch)
-            # store the forecast
-            forecasts.append(forecast)
-        return forecasts
-
-    # invert differenced forecast
-    def inverse_difference(last_ob, forecast):
-        # invert first forecast
-        inverted = list()
-        inverted.append(forecast[0] + last_ob)
-        # propagate difference forecast using inverted first value
-        for i in range(1, len(forecast)):
-            inverted.append(forecast[i] + inverted[i-1])
-        return inverted
-    
-    # inverse data transform on forecasts
-    def inverse_transform(series, forecasts, scaler, n_test):
-        inverted = list()
-        for i in range(len(forecasts)):
-            # create array from forecast
-            forecast = array(forecasts[i])
-            forecast = forecast.reshape(1, len(forecast))
-            # invert scaling
-            inv_scale = scaler.inverse_transform(forecast)
-            inv_scale = inv_scale[0, :]
-            # invert differencing
-            index = len(series) - n_test + i - 1
-            last_ob = series.values[index]
-            inv_diff = inverse_difference(last_ob, inv_scale)
-            # store
-            inverted.append(inv_diff)
-        return inverted
-
-    # evaluate the RMSE for each forecast time step
-    def evaluate_forecasts(test, forecasts, n_lag, n_seq):
-        for i in range(n_seq):
-            actual = [row[i] for row in test]
-            predicted = [forecast[i] for forecast in forecasts]
-            rmse = sqrt(mean_squared_error(actual, predicted))
-            print('t+%d RMSE: %f' % ((i+1), rmse))
-
-        # @classmethod
-    # def model_score(model, X_train, y_train, X_test, y_test):
-    #     trainScore = model.evaluate(X_train, y_train, verbose=0)
-    #     print('Train Score: %.5f MSE (%.2f RMSE)' % (trainScore[0], math.sqrt(trainScore[0])))
-
-    #     testScore = model.evaluate(X_test, y_test, verbose=0)
-    #     print('Test Score: %.5f MSE (%.2f RMSE)' % (testScore[0], math.sqrt(testScore[0])))
-    #     return trainScore[0], testScore[0]
-
-    # @classmethod
-    # def percentage_difference(model, X_test, y_test):
-    #     percentage_diff=[]
-
-    #     p = model.predict(X_test)
-    #     for u in range(len(y_test)): # for each data index in test data
-    #         pr = p[u][0] # pr = prediction on day u
-
-    #     percentage_diff.append((pr-y_test[u]/pr)*100)
-    #     return p
-
     def train_model(self):
         series = self.data
         n_lag = self.n_lag
@@ -243,19 +184,18 @@ class Model(object):
         n_epochs = self.n_epochs
         n_batch = self.n_batch
         n_neurons = self.n_neurons
+        
+        #prepare the data
+        train_X, train_y, test_X, test_y = self.prepare_data(series)
 
-
-        # prepare data
-        scaler, train, test = Model.prepare_data(series, n_test, n_lag, n_seq)
         # fit model
-        model = self.fit_lstm(train, n_lag, n_seq, n_batch, n_epochs, n_neurons)
-        # make forecasts
-        forecasts = self.make_forecasts(model, n_batch, train, test, n_lag, n_seq)
-        # inverse transform forecasts and test
-        forecasts = self.inverse_transform(series, forecasts, scaler, n_test+2)
-        actual = [row[n_lag:] for row in test]
-        actual = self.inverse_transform(series, actual, scaler, n_test+2)
-        # evaluate forecasts
-        self.evaluate_forecasts(actual, forecasts, n_lag, n_seq)
-        # plot forecasts
-        helpers.plot_forecasts(series, forecasts, n_test+2)
+        model = Model.fit_lstm(train_X, train_y, test_X, test_y)
+        # make a prediction
+        yhat = model.predict(test_X)
+        newp = denormalize(data, yhat)
+        newy_test =denormalize(data, test_y) 
+        # calculate RMSE
+        rmse = sqrt(mean_squared_error(newy_test, newp))
+        print('Test RMSE: %.3f' % rmse)
+
+
