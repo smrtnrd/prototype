@@ -68,13 +68,14 @@ def prepare_data(data, normalize=True):
 
 
 def denormalize(data, normalized_value):
-    dataset = read_csv(data, index_col=3, header=0)
+    dataset = read_csv(data, index_col=19, header=0)
     # manually specify column names
-    dataset.columns = ['statename','activity_level','activity_level_label','season','weeknumber','Latitude','Longitude']
+    dataset = read_csv(data, index_col=19, header=0)
+    dataset.columns = ['statename','activity_level_label','week_TEMP', 'week_MAX','week_MIN','week_STP','week_PRCP','weekend','weeknumber','Latitude','Longitude', "a_2009_h1n1"]
     dataset.index.name = 'date'
         
     # convert index to datetime
-    dataset.index = pd.to_datetime(dataset.index, format='%b-%d-%Y')
+    dataset.index = pd.to_datetime(dataset.index, format='%Y-%m-%d')
         
     # manually remove the feature we don;t want to evaluate 
     dataset.drop(['statename', 'season', 'weeknumber','activity_level_label'], axis=1, inplace=True)
@@ -90,7 +91,7 @@ def denormalize(data, normalized_value):
     return new
 
 # load dataset
-data = '../data/raw.csv'
+data = '../data/2010-2015_ili_sub_climate.csv'
 
 scaled = prepare_data(data)
 
