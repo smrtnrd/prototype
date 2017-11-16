@@ -42,44 +42,36 @@ def prepare_data(data, normalize=True):
     Return a dataframe of that stock and normalize all the values. 
     (Optional: create moving average)
     """
-    dataset = read_csv(data, index_col=3, header=0)
-
+    dataset = read_csv(data, names=['statename','YEAR','MONTH','WEEK','weekend','ili_activity_label','a_2009_h1n1','Latitude','Longitude','week_TEMP','week_MAX','week_MIN'])
+    print(dataset.head(5))
     # manually specify column names
-    dataset.columns = ['statename','activity_level','activity_level_label','season','weeknumber','Latitude','Longitude']
     dataset.index.name = 'date'
-        
-    # convert index to datetime
-    dataset.index = pd.to_datetime(dataset.index, format='%b-%d-%Y')
-        
-    # manually remove the feature we don;t want to evaluate 
-    dataset.drop(['statename', 'season', 'weeknumber','activity_level_label'], axis=1, inplace=True)
+
+    
 
     if normalize:
+        # integer encoder
+        label_encoder = LabelEncoder()
+        ili_values = dataset['ili_activity_label'].reshape(-1,1)
+        dataset['ili_activity_label'] = label_encoder.fit_transform(ili_values)
         min_max_scaler = MinMaxScaler()
-        dataset['activity_level'] = min_max_scaler.fit_transform(dataset.activity_level.reshape(-1,1))
+        dataset['ili_activity_label'] = min_max_scaler.fit_transform(ili_values)
         dataset['Latitude'] = min_max_scaler.fit_transform(dataset.Latitude.reshape(-1,1))
         dataset['Longitude'] = min_max_scaler.fit_transform(dataset.Longitude.reshape(-1,1))
     
     # Move Adj Close to the rightmost for the ease of training
-    activity_level = dataset['activity_level']
-    dataset.drop(labels=['activity_level'], axis=1, inplace=True)
-    dataset = pd.concat([dataset, activity_level], axis=1)
-    dataset.to_csv("../data/ili.csv", sep='\t', encoding='utf-8')
+    # activity_level = dataset['ili_activity_label']
+    # dataset.drop(labels=['activity_level'], axis=1, inplace=True)
+    # dataset = pd.concat([dataset, activity_level], axis=1)
+    dataset.to_csv("../data/ili.csv", sep=',', encoding='utf-8')
     return dataset
 
 
 def denormalize(data, normalized_value):
-    dataset = read_csv(data, index_col=19, header=0)
+    dataset = read_csv(data, names=['statename','YEAR','MONTH','WEEK','weekend','ili_activity_label','a_2009_h1n1','Latitude','Longitude','week_TEMP','week_MAX','week_MIN'])
+    print(dataset.head(5))
     # manually specify column names
-    dataset = read_csv(data, index_col=19, header=0)
-    dataset.columns = ['statename','activity_level_label','week_TEMP', 'week_MAX','week_MIN','week_STP','week_PRCP','weekend','weeknumber','Latitude','Longitude', "a_2009_h1n1"]
     dataset.index.name = 'date'
-        
-    # convert index to datetime
-    dataset.index = pd.to_datetime(dataset.index, format='%Y-%m-%d')
-        
-    # manually remove the feature we don;t want to evaluate 
-    dataset.drop(['statename', 'season', 'weeknumber','activity_level_label'], axis=1, inplace=True)
 
     dataset = dataset['activity_level'].values.reshape(-1,1)
     normalized_value = normalized_value.reshape(-1,1)
