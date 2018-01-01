@@ -1,5 +1,7 @@
 
 # ILI activiy prediction from Lat, Long
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
 from math import sqrt
 from numpy import concatenate
@@ -160,7 +162,7 @@ if __name__ == "__main__":
     print(test_X.shape)
 
     # fit network
-    history = model.fit(train_X, train_y, epochs=50, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False)
+    history = model.fit(train_X, train_y, epochs=50, batch_size=52, validation_data=(test_X, test_y), verbose=2, shuffle=False)
     # plot history
     plt.plot(history.history['loss'], label='train')
     plt.plot(history.history['val_loss'], label='test')

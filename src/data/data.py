@@ -31,12 +31,6 @@ class Data(object) :
         df.columns = ['statename','activity_level','activity_level_label','season','weeknumber','Latitude','Longitude']
         df.index.name = 'date'
         
-        # Moving Average    
-        if ma != []:
-            for moving in ma:
-                df['{}ma'.format(moving)] = df['Adj Close'].rolling(window=moving).mean()
-            df.dropna(inplace=True)
-
 
         # convert index to datetime
         df.index = pd.to_datetime(df.index, format='%b-%d-%Y')
